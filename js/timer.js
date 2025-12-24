@@ -97,16 +97,13 @@ async function resetTimer() {
     
     isRunning = false;
     clearInterval(timerInterval);
-    showSatireMessage(message
+    timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
+    initialTimeRemaining = 10;
+    pauseStartTime = null;
     pauseWarningShown = false;
     updateDisplay();
     document.getElementById('startBtn').classList.remove('hidden');
-    document.getElementById('pauseBtn
-    timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
-    updateDisplay();
-    document.getElementById('startBtn').classList.remove('hidden');
     document.getElementById('pauseBtn').classList.add('hidden');
-    document.getElementById('timerMessage').classList.add('hidden');
 }
 
 /**
