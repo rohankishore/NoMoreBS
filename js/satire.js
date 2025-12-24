@@ -1,0 +1,125 @@
+/**
+ * Satirical message generator with adjustable levels
+ * @param {number} level - Satire level (0-3)
+ * @param {boolean} allowProfanity - Whether to allow strong language
+ * @returns {string} A satirical message
+ */
+export function getSatiricalLine(level, allowProfanity) {
+    const messages = {
+        0: [
+            "Good job! You completed a focused work session.",
+            "Well done. Time for a short break.",
+            "Nice work. You stayed focused for 25 minutes.",
+            "Excellent. You've earned a break.",
+            "Great job staying on task."
+        ],
+        1: [
+            "Oh, you actually finished? Color me impressed.",
+            "25 minutes of work. Truly groundbreaking.",
+            "Wow, a whole Pomodoro. What's next, a medal?",
+            "Look at you, sitting still for 25 minutes.",
+            "Congratulations on doing the bare minimum."
+        ],
+        2: [
+            "Shocking news: You did work instead of scrolling TikTok.",
+            "Breaking: Local procrastinator completes one (1) task.",
+            "Alert the media! Someone actually focused for once.",
+            "Incredible. You resisted opening 47 new tabs.",
+            "Wow. One whole Pomodoro. Your ancestors would be SO proud.",
+            "Ladies and gentlemen, they didn't check their phone. Historic."
+        ],
+        3: allowProfanity ? [
+            "Holy shit, you actually did it. Hell might freeze over.",
+            "Un-fucking-believable. You stayed focused. What's your secret?",
+            "Well fuck me sideways, you completed a task like an adult.",
+            "No fucking way. Did you seriously just work for 25 minutes straight?",
+            "Damn! Look who decided to be productive. About fucking time.",
+            "Jesus Christ, you did it. Maybe you're not hopeless after all."
+        ] : [
+            "Absolutely shocking. You worked instead of doom-scrolling.",
+            "Unbelievable. You resisted every distraction. Who are you?",
+            "This is wild. You actually acted like a functional human.",
+            "Stop the presses! Someone completed a task without 50 breaks.",
+            "Damn! Look who decided to be productive for once.",
+            "Are you feeling okay? You just... worked. Voluntarily."
+        ]
+    };
+    
+    const levelMessages = messages[level] || messages[1];
+    return levelMessages[Math.floor(Math.random() * levelMessages.length)];
+}
+
+/**
+ * Get current satire settings
+ * @returns {Promise<{level: number, allowProfanity: boolean}>}
+ */
+export async function getSatireSettings() {
+    // Try to get from localStorage first (faster)
+    const cached = localStorage.getItem('satireSettings');
+    if (cached) {
+        return JSON.parse(cached);
+    }
+    
+    // Default settings
+    return {
+        level: 1,
+        allowProfanity: false
+    };
+}
+
+/**
+ * Save satire settings
+ * @param {number} level 
+ * @param {boolean} allowProfanity 
+ */
+export async function saveSatireSettings(level, allowProfanity) {
+    const settings = { level, allowProfanity };
+    
+    // Save to localStorage
+    localStorage.setItem('satireSettings', JSON.stringify(settings));
+    
+    // Optional: Save to Supabase user metadata or settings table
+    // This would require importing supabase and updating user metadata
+}
+
+/**
+ * Initialize satire settings UI
+ */
+export async function initSatireSettings() {
+    const satireLevel = document.getElementById('satireLevel');
+    const satireLevelDisplay = document.getElementById('satireLevelDisplay');
+    const allowProfanity = document.getElementById('allowProfanity');
+    const profanityWarning = document.getElementById('profanityWarning');
+    
+    if (!satireLevel || !allowProfanity) return;
+    
+    // Load saved settings
+    const settings = await getSatireSettings();
+    satireLevel.value = settings.level;
+    satireLevelDisplay.textContent = settings.level;
+    allowProfanity.checked = settings.allowProfanity;
+    
+    // Show warning if profanity is enabled
+    if (settings.allowProfanity) {
+        profanityWarning.classList.remove('hidden');
+    }
+    
+    // Update level display
+    satireLevel.addEventListener('input', (e) => {
+        satireLevelDisplay.textContent = e.target.value;
+        saveSatireSettings(parseInt(e.target.value), allowProfanity.checked);
+    });
+    
+    // Update profanity setting
+    allowProfanity.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        saveSatireSettings(parseInt(satireLevel.value), checked);
+        
+        // Show/hide warning
+        if (checked) {
+            profanityWarning.classList.remove('hidden');
+        } else {
+            profanityWarning.classList.add('hidden');
+        }
+    });
+}
