@@ -308,10 +308,18 @@
         });
         
         closeMenu?.addEventListener('click', () => {
-            const timerView = document.getElementById('timerView');
-            const tasksView = document.getElementById('mobileTasksView');
-            const settingsView = document.getElementById('mobileSettingsView');
-            
+            desktopMenu.classList.add('-translate-x-full');
+        });
+        
+        // Mobile navigation
+        const mobileTasksBtn = document.getElementById('mobileTasksBtn');
+        const mobileTimerBtn = document.getElementById('mobileTimerBtn');
+        const mobileSettingsBtn = document.getElementById('mobileSettingsBtn');
+        const timerView = document.getElementById('timerView');
+        const tasksView = document.getElementById('mobileTasksView');
+        const settingsView = document.getElementById('mobileSettingsView');
+        
+        function showView(view) {
             // Hide all mobile views
             timerView?.classList.add('hidden');
             tasksView?.classList.add('hidden');
@@ -327,18 +335,6 @@
                     btn.classList.remove('text-purple-500');
                     btn.classList.add('text-gray-400');
                 }
-        const settingsView = document.getElementById('mobileSettingsView');
-        
-        function showView(view) {
-            timerView.classList.add('hidden');
-            tasksView.classList.add('hidden');
-            settingsView.classList.add('hidden');
-            view.classList.remove('hidden');
-            
-            // Update nav button states
-            [mobileTasksBtn, mobileTimerBtn, mobileSettingsBtn].forEach(btn => {
-                btn.querySelector('svg').parentElement.classList.remove('text-purple-500');
-                btn.querySelector('svg').parentElement.classList.add('text-gray-400');
             });
         }
         
