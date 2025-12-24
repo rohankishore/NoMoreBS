@@ -32,6 +32,18 @@
                 left: 0;
                 right: 0;
             }
+            /* Hide menu sections on desktop */
+            #desktopMenu {
+                display: block !important;
+            }
+        }
+        /* Desktop: always show as sidebar when open */
+        @media (min-width: 769px) {
+            /* Hide mobile-only views on desktop */
+            #mobileTasksView,
+            #mobileSettingsView {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -245,7 +257,7 @@
     </div>
 
     <!-- Main Timer View (Always visible unless on mobile tasks/settings) -->
-    <main id="timerView" class="flex items-center justify-center min-h-screen px-4">
+    <main id="timerView" class="flex items-center justify-center min-h-screen px-4 md:pl-0">
         <div class="w-full max-w-md">
             <div class="text-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-purple-500 mb-2">Focus Timer</h1>
@@ -296,15 +308,25 @@
         });
         
         closeMenu?.addEventListener('click', () => {
-            desktopMenu.classList.add('-translate-x-full');
-        });
-        
-        // Mobile navigation
-        const mobileTasksBtn = document.getElementById('mobileTasksBtn');
-        const mobileTimerBtn = document.getElementById('mobileTimerBtn');
-        const mobileSettingsBtn = document.getElementById('mobileSettingsBtn');
-        const timerView = document.getElementById('timerView');
-        const tasksView = document.getElementById('mobileTasksView');
+            const timerView = document.getElementById('timerView');
+            const tasksView = document.getElementById('mobileTasksView');
+            const settingsView = document.getElementById('mobileSettingsView');
+            
+            // Hide all mobile views
+            timerView?.classList.add('hidden');
+            tasksView?.classList.add('hidden');
+            settingsView?.classList.add('hidden');
+            
+            // Show selected view
+            view?.classList.remove('hidden');
+            
+            // Update nav button states
+            const buttons = [mobileTasksBtn, mobileTimerBtn, mobileSettingsBtn];
+            buttons.forEach(btn => {
+                if (btn) {
+                    btn.classList.remove('text-purple-500');
+                    btn.classList.add('text-gray-400');
+                }
         const settingsView = document.getElementById('mobileSettingsView');
         
         function showView(view) {
