@@ -3,10 +3,21 @@ import { getSatiricalLine, getSatireSettings, initSatireSettings } from './satir
 let timerInterval = null;
 let timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
 let isRunning = false;
+let pauseStartTime = null;
+let pauseWarningShown = false;
+let initialTimeRemaining = 10;
 
 /**
- * Format seconds to MM:SS
+ * Show satirical message
  */
+async function showSatireMessage(message, type = 'info') {
+    const messageEl = document.getElementById('timerMessage');
+    messageEl.textContent = message;
+    messageEl.className = `p-4 rounded-lg text-white text-base md:text-lg font-medium ${
+        type === 'error' ? 'bg-red-900/50 border-2 border-red-500' : 'bg-gray-700'
+    }`;
+    messageEl.classList.remove('hidden');
+}
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -30,8 +41,11 @@ function startTimer() {
     if (isRunning) return;
     
     isRunning = true;
+    pauseStartTime = null;
+    pauseWarningShown = false;
     document.getElementById('startBtn').classList.add('hidden');
     document.getElementById('pauseBtn').classList.remove('hidden');
+    document.getElementById('timerMessage').classList.add('hidden');
     
     timerInterval = setInterval(() => {
         timeRemaining--;
@@ -49,16 +63,45 @@ function startTimer() {
 function pauseTimer() {
     isRunning = false;
     clearInterval(timerInterval);
+    pauseStartTime = Date.now();
+    pauseWarningShown = false;
     document.getElementById('startBtn').classList.remove('hidden');
     document.getElementById('pauseBtn').classList.add('hidden');
+    
+    // Start checking pause duration
+    setTimeout(() => checkPauseDuration(), 61000); // Check after 61 seconds
 }
 
 /**
  * Reset the timer
  */
-function resetTimer() {
+async function resetTimer() {
+    // Check if quitting early (more than 10% of time remaining)
+    const percentRemaining = timeRemaining / initialTimeRemaining;
+    
+    if (isRunning || (timeRemaining > 0 && percentRemaining > 0.1)) {
+        const settings = await getSatireSettings();
+        const messages = {
+            0: "Timer reset. You can start over anytime.",
+            1: "Giving up already? Well, at least you're consistent.",
+            2: "Wow. Just... wow. Couldn't even finish this one, huh?",
+            3: settings.allowProfanity ?
+                "Fucking quitter. Can't even finish a goddamn timer." :
+                "Quitting early again? What a surprise. Absolutely shocking."
+        };
+        
+        if (percentRemaining > 0.5) { // More than 50% remaining
+            showSatireMessage(messages[settings.level] || messages[1], 'error');
+        }
+    }
+    
     isRunning = false;
     clearInterval(timerInterval);
+    showSatireMessage(message
+    pauseWarningShown = false;
+    updateDisplay();
+    document.getElementById('startBtn').classList.remove('hidden');
+    document.getElementById('pauseBtn
     timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
     updateDisplay();
     document.getElementById('startBtn').classList.remove('hidden');

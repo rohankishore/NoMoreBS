@@ -91,35 +91,85 @@ export async function initSatireSettings() {
     const allowProfanity = document.getElementById('allowProfanity');
     const profanityWarning = document.getElementById('profanityWarning');
     
-    if (!satireLevel || !allowProfanity) return;
+    // Mobile elements
+    const satireLevelMobile = document.getElementById('satireLevelMobile');
+    const satireLevelDisplayMobile = document.getElementById('satireLevelDisplayMobile');
+    const allowProfanityMobile = document.getElementById('allowProfanityMobile');
+    const profanityWarningMobile = document.getElementById('profanityWarningMobile');
+    
+    if (!satireLevel && !satireLevelMobile) return;
     
     // Load saved settings
     const settings = await getSatireSettings();
-    satireLevel.value = settings.level;
-    satireLevelDisplay.textContent = settings.level;
-    allowProfanity.checked = settings.allowProfanity;
     
-    // Show warning if profanity is enabled
-    if (settings.allowProfanity) {
-        profanityWarning.classList.remove('hidden');
+    // Set desktop values
+    if (satireLevel) {
+        satireLevel.value = settings.level;
+        satireLevelDisplay.textContent = settings.level;
+        allowProfanity.checked = settings.allowProfanity;
+        if (settings.allowProfanity) profanityWarning.classList.remove('hidden');
     }
     
-    // Update level display
-    satireLevel.addEventListener('input', (e) => {
-        satireLevelDisplay.textContent = e.target.value;
-        saveSatireSettings(parseInt(e.target.value), allowProfanity.checked);
+    // Set mobile values
+    if (satireLevelMobile) {
+        satireLevelMobile.value = settings.level;
+        satireLevelDisplayMobile.textContent = settings.level;
+        allowProfanityMobile.checked = settings.allowProfanity;
+        if (settings.allowProfanity) profanityWarningMobile.classList.remove('hidden');
+    }
+    
+    // Desktop: Update level display
+    satireLevel?.addEventListener('input', (e) => {
+        const level = e.target.value;
+        satireLevelDisplay.textContent = level;
+        if (satireLevelDisplayMobile) satireLevelDisplayMobile.textContent = level;
+        if (satireLevelMobile) satireLevelMobile.value = level;
+        saveSatireSettings(parseInt(level), allowProfanity?.checked || false);
     });
     
-    // Update profanity setting
-    allowProfanity.addEventListener('change', (e) => {
+    // Mobile: Update level display
+    satireLevelMobile?.addEventListener('input', (e) => {
+        const level = e.target.value;
+        satireLevelDisplayMobile.textContent = level;
+        if (satireLevelDisplay) satireLevelDisplay.textContent = level;
+        if (satireLevel) satireLevel.value = level;
+        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false);
+    });
+    
+    // Desktop: Update profanity setting
+    allowProfanity?.addEventListener('change', (e) => {
         const checked = e.target.checked;
-        saveSatireSettings(parseInt(satireLevel.value), checked);
+        if (allowProfanityMobile) allowProfanityMobile.checked = checked;
+        saveSatireSettings(parseInt(satireLevel?.value || 1), checked);
         
-        // Show/hide warning
         if (checked) {
-            profanityWarning.classList.remove('hidden');
+            profanityWarning?.classList.remove('hidden');
+            profanityWarningMobile?.classList.remove('hidden');
         } else {
-            profanityWarning.classList.add('hidden');
+            profanityWarning?.classList.add('hidden');
+            profanityWarningMobile?.classList.add('hidden');
         }
     });
+    
+    // Mobile: Update profanity setting
+    allowProfanityMobile?.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        if (allowProfanity) allowProfanity.checked = checked;
+        saveSatireSettings(parseInt(satireLevelMobile?.value || 1), checked);
+        
+        if (checked) {
+            profanityWarning?.classList.remove('hidden');
+            profanityWarningMobile?.classList.remove('hidden');
+        } else {
+            profanityWarning?.classList.add('hidden');
+            profanityWarningMobile?.classList.add('hidden');
+        }
+    });
+}
+
+/**
+ * Sync settings between desktop and mobile (call this on init)
+ */
+export function syncSettings() {
+    initSatireSettings();
 }
