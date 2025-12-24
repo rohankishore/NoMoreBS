@@ -84,16 +84,18 @@ async function loadTodos() {
         // Render todos
         if (data.length === 0) {
             const emptyHTML = `
-                <div class="text-center text-gray-400 py-8">
+                <div class="text-center text-gray-400 py-8 text-sm">
                     No tasks yet. Add one above!
                 </div>
             `;
             todoList.innerHTML = emptyHTML;
-            document.getElementById('todoListMobile').innerHTML = emptyHTML;
+            const mobileList = document.getElementById('todoListMobile');
+            if (mobileList) mobileList.innerHTML = emptyHTML;
         } else {
             const todosHTML = data.map(todo => renderTodoItem(todo)).join('');
             todoList.innerHTML = todosHTML;
-            document.getElementById('todoListMobile').innerHTML = todosHTML;
+            const mobileList = document.getElementById('todoListMobile');
+            if (mobileList) mobileList.innerHTML = todosHTML;
             attachTodoEventListeners();
         }
     } catch (error) {
@@ -141,7 +143,24 @@ function renderTodoItem(todo) {
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
-            </button>, deadline = null) {
+            </button>
+        </div>
+    `;
+}
+
+/**
+ * Escape HTML to prevent XSS
+ */
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+/**
+ * Add a new todo
+ */
+async function addTodo(title, deadline = null) {
     try {
         const { error } = await supabase
             .from('todos')
@@ -151,28 +170,6 @@ function renderTodoItem(todo) {
                     title,
                     completed: false,
                     deadline: deadline || null
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-/**
- * Add a new todo
- */
-async function addTodo(title) {
-    try {
-        const { error } = await supabase
-            .from('todos')
-            .insert([
-                {
-                    user_id: currentUser.id,
-                    title,
-        // Clear notification flag when completing
-        if (completed) {
-            localStorage.removeItem(`notified_${todoId}`);
-        }
-        
-                    completed: false
                 }
             ]);
         
@@ -190,6 +187,11 @@ async function addTodo(title) {
  */
 async function toggleTodo(todoId, completed) {
     try {
+        // Clear notification flag when completing
+        if (completed) {
+            localStorage.removeItem(`notified_${todoId}`);
+        }
+        
         const { error } = await supabase
             .from('todos')
             .update({ completed })
@@ -228,7 +230,30 @@ async function deleteTodo(todoId) {
  */
 function attachTodoEventListeners() {
     // Checkboxes
-    documeaddTodoFormMobile = document.getElementById('addTodoFormMobile');
+    document.querySelectorAll('.todo-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const todoId = e.target.closest('[data-todo-id]').dataset.todoId;
+            toggleTodo(todoId, e.target.checked);
+        });
+    });
+    
+    // Delete buttons
+    document.querySelectorAll('.todo-delete').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const todoId = e.target.closest('[data-todo-id]').dataset.todoId;
+            if (confirm('Delete this task?')) {
+                deleteTodo(todoId);
+            }
+        });
+    });
+}
+
+/**
+ * Initialize todo functionality
+ */
+export function initTodos() {
+    const addTodoForm = document.getElementById('addTodoForm');
+    const addTodoFormMobile = document.getElementById('addTodoFormMobile');
     const todoInput = document.getElementById('todoInput');
     const todoDeadline = document.getElementById('todoDeadline');
     const todoInputMobile = document.getElementById('todoInputMobile');
@@ -269,30 +294,7 @@ function attachTodoEventListeners() {
         todoDeadlineMobile.value = '';
         
         // Sync to desktop inputs
-        loadTodos()
-}
-
-/**
- * Initialize todo functionality
- */
-export function initTodos() {
-    const addTodoForm = document.getElementById('addTodoForm');
-    const todoInput = document.getElementById('todoInput');
-    
-    if (!addTodoForm) return;
-    
-    // Load initial todos
-    loadTodos();
-    
-    // Handle form submission
-    addTodoForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const title = todoInput.value.trim();
-        if (!title) return;
-        
-        await addTodo(title);
-        todoInput.value = '';
+        loadTodos();
     });
     
     // Set up real-time subscriptions
