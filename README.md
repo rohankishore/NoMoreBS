@@ -74,21 +74,28 @@ CREATE POLICY "Users can delete their own todos"
 4. Set **Site URL** to your deployment URL (e.g., `https://your-app.vercel.app`)
 5. Add **Redirect URLs**: `https://your-app.vercel.app/dashboard.html`
 
-### 3. Environment Variables
+### 3. Get Your Supabase Credentials
 
-#### Option A: Local Development
+1. In your Supabase dashboard, go to **Settings** (gear icon) → **API**
+2. Copy these values:
+   - **Project URL**: `https://xxxxx.supabase.co`
+   - **anon public key**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
 
-Create a file to inject environment variables:
+### 4. Environment Variables
 
-```html
-<!-- Add before closing </head> in index.html, login.html, dashboard.html -->
-<script>
-    window.ENV = {
-        SUPABASE_URL: 'https://your-project.supabase.co',
-        SUPABASE_ANON_KEY: 'your-anon-key-here'
-    };
-</script>
+#### Option A: Local Development (Recommended for Testing)
+
+Edit the `env-config.js` file with your credentials:
+
+```javascript
+// env-config.js (already created - just edit it!)
+window.ENV = {
+    SUPABASE_URL: 'https://xxxxxxxxxxxxx.supabase.co',  // Your Project URL
+    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'  // Your anon key
+};
 ```
+
+**Note**: This file is already linked in all HTML files and is gitignored for safety.
 
 #### Option B: Vercel Deployment
 
@@ -132,7 +139,7 @@ Create a file to inject environment variables:
 
 4. Add env injection to your build process
 
-### 4. Run Locally
+### 5. Run Locally
 
 Use any static file server:
 

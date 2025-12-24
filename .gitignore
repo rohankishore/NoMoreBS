@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.production
+env-config.js
 
 # Ignore OS files
 .DS_Store
