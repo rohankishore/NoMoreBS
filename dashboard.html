@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NoMoreBS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+</head>
+<body class="dark bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-10">
+        <div class="px-4 py-4 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-purple-500">NoMoreBS</h1>
+            <button id="logoutBtn" class="text-gray-400 hover:text-white transition">
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4 py-6 space-y-6">
+        <!-- Timer Section -->
+        <section class="bg-gray-800 rounded-lg shadow-xl p-6">
+            <h2 class="text-xl font-bold text-white mb-4">Pomodoro Timer</h2>
+            
+            <div class="text-center">
+                <div id="timerDisplay" class="text-6xl font-bold text-purple-500 mb-6 font-mono">
+                    25:00
+                </div>
+                
+                <div class="flex gap-3 justify-center">
+                    <button id="startBtn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                        Start
+                    </button>
+                    <button id="pauseBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-6 rounded-lg transition hidden">
+                        Pause
+                    </button>
+                    <button id="resetBtn" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                        Reset
+                    </button>
+                </div>
+
+                <!-- Satirical Message -->
+                <div id="timerMessage" class="mt-6 p-4 bg-gray-700 rounded-lg text-white text-lg font-medium hidden"></div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section class="bg-gray-800 rounded-lg shadow-xl p-6">
+            <h2 class="text-xl font-bold text-white mb-4">Satire Settings</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">
+                        Satire Level: <span id="satireLevelDisplay" class="text-purple-400">1</span>
+                    </label>
+                    <input 
+                        type="range" 
+                        id="satireLevel" 
+                        min="0" 
+                        max="3" 
+                        value="1"
+                        class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                    >
+                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                        <span>Polite</span>
+                        <span>Mild</span>
+                        <span>Sarcastic</span>
+                        <span>Aggressive</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <label for="allowProfanity" class="text-sm font-medium text-gray-300">
+                        Allow strong language
+                    </label>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="allowProfanity" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <!-- Disclaimer -->
+                <div id="profanityWarning" class="hidden p-3 bg-yellow-900/30 border border-yellow-700 rounded-lg">
+                    <p class="text-yellow-300 text-sm">
+                        ⚠️ This mode uses exaggerated, satirical language. It's optional, and you can turn it off anytime.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Todo Section -->
+        <section class="bg-gray-800 rounded-lg shadow-xl p-6">
+            <h2 class="text-xl font-bold text-white mb-4">Tasks</h2>
+            
+            <!-- Add Todo Form -->
+            <form id="addTodoForm" class="mb-4">
+                <div class="flex gap-2">
+                    <input 
+                        type="text" 
+                        id="todoInput" 
+                        placeholder="Add a task..."
+                        required
+                        class="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    >
+                    <button 
+                        type="submit"
+                        class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition whitespace-nowrap"
+                    >
+                        Add
+                    </button>
+                </div>
+            </form>
+
+            <!-- Todo List -->
+            <div id="todoList" class="space-y-2">
+                <div class="text-center text-gray-400 py-8">
+                    Loading...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { checkAuthentication } from './js/auth.js';
+        import { initTodos } from './js/todos.js';
+        import { initTimer } from './js/timer.js';
+        
+        // Protect dashboard
+        await checkAuthentication();
+        
+        // Initialize features
+        initTodos();
+        initTimer();
+    </script>
+</body>
+</html>
