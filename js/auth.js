@@ -21,6 +21,9 @@ export async function logout() {
 // Initialize login page
 if (window.location.pathname.includes('login.html')) {
     const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
     const statusMessage = document.getElementById('statusMessage');
     
     // Check if already logged in
@@ -29,18 +32,59 @@ if (window.location.pathname.includes('login.html')) {
         window.location.href = '/dashboard.html';
     }
     
+    // Tab switching
+    loginTab.addEventListener('click', () => {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+        loginTab.className = 'pb-3 px-2 text-purple-400 border-b-2 border-purple-500 font-semibold';
+        signupTab.className = 'pb-3 px-2 text-gray-400 hover:text-white transition';
+        statusMessage.classList.add('hidden');
+    });
+    
+    signupTab.addEventListener('click', () => {
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        signupTab.className = 'pb-3 px-2 text-purple-400 border-b-2 border-purple-500 font-semibold';
+        loginTab.className = 'pb-3 px-2 text-gray-400 hover:text-white transition';
+        statusMessage.classList.add('hidden');
+    });
+    
     // Handle login form submission
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const email = document.getElementById('email').value;
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
         
         try {
-            const { error } = await supabase.auth.signInWithOtp({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email,
-                options: {
-                    emailRedirectTo: window.location.origin + '/dashboard.html'
-                }
+                password
+            });
+            
+            if (error) throw error;
+            
+            // Redirect to dashboard
+            window.location.href = '/dashboard.html';
+        } catch (error) {
+            // Show error message
+            statusMessage.classList.remove('hidden');
+            statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
+            statusMessage.querySelector('div').textContent = error.message;
+        }
+    });
+    
+    // Handle signup form submission
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        
+        try {
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password
             });
             
             if (error) throw error;
@@ -48,10 +92,12 @@ if (window.location.pathname.includes('login.html')) {
             // Show success message
             statusMessage.classList.remove('hidden');
             statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-green-900/30 border border-green-700 text-green-300';
-            statusMessage.querySelector('div').textContent = 'Check your email for the magic link!';
+            statusMessage.querySelector('div').textContent = 'Account created! Signing you in...';
             
-            // Clear form
-            loginForm.reset();
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = '/dashboard.html';
+            }, 1000);
         } catch (error) {
             // Show error message
             statusMessage.classList.remove('hidden');

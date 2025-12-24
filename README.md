@@ -6,7 +6,7 @@ Built with vanilla HTML, CSS, JavaScript, Tailwind CSS, and Supabase.
 
 ## ✨ Features
 
-- 🔐 **Email Magic Link Authentication** via Supabase
+- 🔐 **Email/Password Authentication** via Supabase
 - ✅ **Todo Management** with real-time sync
 - ⏱️ **Pomodoro Timer** (25-minute sessions)
 - 😈 **Adjustable Satire Engine** (0-3 levels)
@@ -70,9 +70,9 @@ CREATE POLICY "Users can delete their own todos"
 
 1. Go to **Authentication > Providers** in Supabase
 2. Enable **Email** provider
-3. Configure email templates (optional)
-4. Set **Site URL** to your deployment URL (e.g., `https://your-app.vercel.app`)
-5. Add **Redirect URLs**: `https://your-app.vercel.app/dashboard.html`
+3. **IMPORTANT**: Go to **Authentication > Policies** and:
+   - Disable "Confirm email" (or users can sign up instantly)
+   - No password length restrictions
 
 ### 3. Get Your Supabase Credentials
 
