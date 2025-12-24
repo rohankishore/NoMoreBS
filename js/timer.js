@@ -1,7 +1,7 @@
 import { getSatiricalLine, getSatireSettings, initSatireSettings } from './satire.js';
 
 let timerInterval = null;
-let timeRemaining = 25 * 60; // 25 minutes in seconds
+let timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
 let isRunning = false;
 
 /**
@@ -59,7 +59,7 @@ function pauseTimer() {
 function resetTimer() {
     isRunning = false;
     clearInterval(timerInterval);
-    timeRemaining = 25 * 60;
+    timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
     updateDisplay();
     document.getElementById('startBtn').classList.remove('hidden');
     document.getElementById('pauseBtn').classList.add('hidden');

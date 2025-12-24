@@ -81,6 +81,14 @@ if (window.location.pathname.includes('login.html')) {
         const email = document.getElementById('signupEmail').value;
         const password = document.getElementById('signupPassword').value;
         
+        // Validate password length
+        if (password.length < 6) {
+            statusMessage.classList.remove('hidden');
+            statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
+            statusMessage.querySelector('div').textContent = 'Password must be at least 6 characters long.';
+            return;
+        }
+        
         try {
             const { data, error } = await supabase.auth.signUp({
                 email,
