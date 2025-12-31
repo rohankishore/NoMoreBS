@@ -40,9 +40,22 @@
 
             <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 md:p-16">
                 <div class="text-center">
+                    <!-- Timer Presets -->
+                    <div class="flex flex-wrap gap-3 justify-center mb-8">
+                        <button id="pomodoroBtn" class="px-6 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition shadow-md">
+                            pomodoro
+                        </button>
+                        <button id="shortBreakBtn" class="px-6 py-3 bg-gray-700 text-white font-medium rounded-full hover:bg-gray-600 transition border-2 border-gray-600">
+                            short break
+                        </button>
+                        <button id="longBreakBtn" class="px-6 py-3 bg-gray-700 text-white font-medium rounded-full hover:bg-gray-600 transition border-2 border-gray-600">
+                            long break
+                        </button>
+                    </div>
+
                     <!-- Timer Display -->
                     <div id="timerDisplay" class="text-8xl md:text-9xl font-bold text-purple-500 mb-12 font-mono tracking-tight">
-                        00:10
+                        25:00
                     </div>
                     
                     <!-- Controls -->

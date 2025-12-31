@@ -1,11 +1,12 @@
 import { getSatiricalLine, getSatireSettings, initSatireSettings } from './satire.js';
 
 let timerInterval = null;
-let timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
+let timeRemaining = 25 * 60; // 25 minutes (pomodoro)
 let isRunning = false;
 let pauseStartTime = null;
 let pauseWarningShown = false;
-let initialTimeRemaining = 10;
+let initialTimeRemaining = 25 * 60;
+let currentMode = 'pomodoro'; // Track current timer mode
 
 /**
  * Show satirical message
@@ -97,13 +98,74 @@ async function resetTimer() {
     
     isRunning = false;
     clearInterval(timerInterval);
-    timeRemaining = 10; // TESTING: 10 seconds (change back to 25 * 60 for production)
-    initialTimeRemaining = 10;
+    timeRemaining = initialTimeRemaining;
     pauseStartTime = null;
     pauseWarningShown = false;
     updateDisplay();
     document.getElementById('startBtn').classList.remove('hidden');
     document.getElementById('pauseBtn').classList.add('hidden');
+}
+
+/**
+ * Set timer to pomodoro (25 minutes)
+ */
+function setPomodoro() {
+    if (isRunning) return;
+    currentMode = 'pomodoro';
+    timeRemaining = 25 * 60;
+    initialTimeRemaining = 25 * 60;
+    updateDisplay();
+    updateModeButtons();
+    document.getElementById('timerMessage').classList.add('hidden');
+}
+
+/**
+ * Set timer to short break (5 minutes)
+ */
+function setShortBreak() {
+    if (isRunning) return;
+    currentMode = 'short';
+    timeRemaining = 5 * 60;
+    initialTimeRemaining = 5 * 60;
+    updateDisplay();
+    updateModeButtons();
+    document.getElementById('timerMessage').classList.add('hidden');
+}
+
+/**
+ * Set timer to long break (15 minutes)
+ */
+function setLongBreak() {
+    if (isRunning) return;
+    currentMode = 'long';
+    timeRemaining = 15 * 60;
+    initialTimeRemaining = 15 * 60;
+    updateDisplay();
+    updateModeButtons();
+    document.getElementById('timerMessage').classList.add('hidden');
+}
+
+/**
+ * Update button styles based on active mode
+ */
+function updateModeButtons() {
+    const pomodoroBtn = document.getElementById('pomodoroBtn');
+    const shortBreakBtn = document.getElementById('shortBreakBtn');
+    const longBreakBtn = document.getElementById('longBreakBtn');
+    
+    // Reset all buttons to inactive state
+    [pomodoroBtn, shortBreakBtn, longBreakBtn].forEach(btn => {
+        if (btn) {
+            btn.className = 'px-6 py-3 bg-gray-700 text-white font-medium rounded-full hover:bg-gray-600 transition border-2 border-gray-600';
+        }
+    });
+    
+    // Highlight active button
+    const activeBtn = currentMode === 'pomodoro' ? pomodoroBtn : 
+                      currentMode === 'short' ? shortBreakBtn : longBreakBtn;
+    if (activeBtn) {
+        activeBtn.className = 'px-6 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition shadow-md';
+    }
 }
 
 /**
@@ -133,6 +195,9 @@ export function initTimer() {
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const resetBtn = document.getElementById('resetBtn');
+    const pomodoroBtn = document.getElementById('pomodoroBtn');
+    const shortBreakBtn = document.getElementById('shortBreakBtn');
+    const longBreakBtn = document.getElementById('longBreakBtn');
     
     if (!startBtn) return;
     
@@ -141,9 +206,15 @@ export function initTimer() {
     
     // Set initial display
     updateDisplay();
+    updateModeButtons();
     
     // Attach event listeners
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
     resetBtn.addEventListener('click', resetTimer);
+    
+    // Attach preset button listeners
+    pomodoroBtn?.addEventListener('click', setPomodoro);
+    shortBreakBtn?.addEventListener('click', setShortBreak);
+    longBreakBtn?.addEventListener('click', setLongBreak);
 }
