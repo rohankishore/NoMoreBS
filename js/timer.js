@@ -156,7 +156,7 @@ function updateModeButtons() {
     // Reset all buttons to inactive state
     [pomodoroBtn, shortBreakBtn, longBreakBtn].forEach(btn => {
         if (btn) {
-            btn.className = 'px-6 py-3 bg-gray-700 text-white font-medium rounded-full hover:bg-gray-600 transition border-2 border-gray-600';
+            btn.className = 'px-8 py-3 bg-transparent text-white font-medium rounded-full hover:bg-white/10 transition border-2 border-white/40 text-base';
         }
     });
     
@@ -164,7 +164,7 @@ function updateModeButtons() {
     const activeBtn = currentMode === 'pomodoro' ? pomodoroBtn : 
                       currentMode === 'short' ? shortBreakBtn : longBreakBtn;
     if (activeBtn) {
-        activeBtn.className = 'px-6 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition shadow-md';
+        activeBtn.className = 'px-8 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition shadow-md text-base';
     }
 }
 
