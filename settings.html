@@ -12,12 +12,11 @@
                 extend: {}
             }
         }
-        
+
     </script>
     <script src="./env-config.js"></script>
 </head>
 <body class="dark bg-gray-900 min-h-screen">
-    <!-- Header with navigation -->
     <header class="bg-gray-800 border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
@@ -39,7 +38,6 @@
         </div>
 
         <div class="bg-gray-800 border border-gray-700 p-10 space-y-12">
-            <!-- Satire Level -->
             <div>
                 <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-6">
                     Abuse Level: <span id="satireLevelDisplay" class="text-red-500">1</span>
@@ -60,7 +58,6 @@
                 </div>
             </div>
 
-            <!-- Allow Profanity -->
             <div class="flex items-center justify-between p-6 border border-gray-700">
                 <div>
                     <label for="allowProfanity" class="text-lg font-black text-white uppercase tracking-tighter block">
@@ -74,7 +71,6 @@
                 </label>
             </div>
 
-            <!-- Warning -->
             <div id="profanityWarning" class="hidden p-6 border-2 border-red-900 bg-red-900/10">
                 <div class="flex items-start gap-4">
                     <div class="text-red-600 text-2xl font-black">!</div>
@@ -87,7 +83,6 @@
                 </div>
             </div>
 
-            <!-- Logout Button -->
             <div class="pt-8 border-t border-gray-700">
                 <button id="logoutBtn" class="w-full bg-white text-black font-black py-4 uppercase tracking-widest hover:bg-gray-200 transition text-lg">
                     Run Away (Logout)
@@ -98,6 +93,15 @@
 
     <script type="module">
         import { checkAuthentication, logout } from './js/auth.js';
+        import { initSatireSettings } from './js/satire.js';
+        
+        await checkAuthentication();
+        initSatireSettings();
+        
+        document.getElementById('logoutBtn')?.addEventListener('click', logout);
+    </script>
+</body>
+</html>
         import { syncSettings } from './js/satire.js';
         
         // Protect page

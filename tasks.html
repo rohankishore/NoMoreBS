@@ -17,7 +17,6 @@
     <script src="./env-config.js"></script>
 </head>
 <body class="dark bg-gray-900 min-h-screen">
-    <!-- Header with navigation -->
     <header class="bg-gray-800 border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
@@ -38,7 +37,6 @@
             <p class="text-gray-500">A list of things you'll probably never do.</p>
         </div>
 
-        <!-- Add Task Form -->
         <div class="mb-12">
             <form id="addTodoForm" class="flex flex-col md:flex-row gap-2">
                 <input 
@@ -62,7 +60,6 @@
             </form>
         </div>
 
-        <!-- Task List -->
         <div class="space-y-2">
             <div id="todoList" class="space-y-2">
                 <div class="text-center text-gray-600 py-20 border-2 border-dashed border-gray-800">
@@ -76,10 +73,7 @@
         import { checkAuthentication } from './js/auth.js';
         import { initTodos } from './js/todos.js';
         
-        // Protect page
         await checkAuthentication();
-        
-        // Initialize todos
         initTodos();
     </script>
 </body>
