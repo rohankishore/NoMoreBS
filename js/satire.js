@@ -265,3 +265,46 @@ document.addEventListener('visibilitychange', () => {
         document.title = originalTitle;
     }
 });
+
+export async function applySnowflakeMode() {
+    const settings = await getSatireSettings();
+    if (!settings.snowflakeMode) return;
+
+    // Turn everything pink and soft
+    const style = document.createElement('style');
+    style.innerHTML = `
+        * { 
+            border-radius: 50px !important; 
+            border-color: #ff69b4 !important;
+            font-family: "Comic Sans MS", "Comic Sans", cursive !important;
+        }
+        body { background-color: #fff0f5 !important; color: #ff1493 !important; }
+        .bg-gray-900, .bg-gray-800, .bg-black { background-color: #fff0f5 !important; }
+        .text-white, .text-gray-400, .text-gray-500 { color: #ff1493 !important; }
+        .border-red-600, .bg-red-600 { border-color: #ff69b4 !important; background-color: #ff69b4 !important; }
+        button { background-color: #ff69b4 !important; color: white !important; box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3) !important; }
+    `;
+    document.head.appendChild(style);
+
+    // The "Crash" logic
+    setTimeout(() => {
+        document.body.innerHTML = `
+            <div style="height: 100vh; width: 100vw; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: sans-serif;">
+                <h1 style="font-size: 10rem;">🤡</h1>
+                <h2 style="color: black; font-weight: 900; text-transform: uppercase; font-size: 3rem;">CRITICAL FAILURE: COWARDICE DETECTED</h2>
+                <p style="color: #666; font-size: 1.5rem; margin-top: 20px;">
+                    You turned on Snowflake Mode because you couldn't handle a few words on a screen.
+                    <br><br>
+                    The app has shut itself down to protect you from reality.
+                    <br><br>
+                    Go back to your "mindfulness" apps, you pathetic loser.
+                </p>
+                <button onclick="localStorage.clear(); location.reload();" style="margin-top: 50px; padding: 20px 40px; background: black; color: white; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase;">
+                    I'M READY TO STOP BEING A BITCH
+                </button>
+            </div>
+        `;
+    }, 30000);
+}
+
+applySnowflakeMode();

@@ -65,7 +65,9 @@ async function resetTimer() {
     if (isRunning || (timeRemaining > 0 && percentRemaining > 0.1)) {
         const settings = await getSatireSettings();
         
-        if (Math.random() < 0.1) {
+        if (settings.snowflakeMode) {
+            showSatireMessage("It's okay to start over! You're doing your best!", 'info');
+        } else if (Math.random() < 0.1) {
             await showParentalDisappointmentModal();
         } else {
             const messages = {
