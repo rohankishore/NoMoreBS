@@ -6,7 +6,7 @@ let deadlineCheckInterval = null;
 
 async function checkOverdueTasks() {
     if (!currentUser) return;
-    
+
     
     const { data, error } = await supabase
         .from('todos')
@@ -160,6 +160,9 @@ async function addTodo(title, deadline = null) {
 }
 
 async function showCompletionModal() {
+    const settings = await getSatireSettings();
+    if (settings.snowflakeMode) return 'truth';
+
     return new Promise((resolve) => {
         const modal = document.createElement('div');
         modal.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4';

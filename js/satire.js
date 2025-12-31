@@ -138,7 +138,7 @@ export async function initSatireSettings() {
         satireLevelDisplayMobile.textContent = level;
         if (satireLevelDisplay) satireLevelDisplay.textContent = level;
         if (satireLevel) satireLevel.value = level;
-        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false, settings.snowflakeMode);
+        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false, snowflakeMode?.checked || false);
     });
     
     allowProfanity?.addEventListener('change', (e) => {
@@ -168,7 +168,7 @@ export async function initSatireSettings() {
     allowProfanityMobile?.addEventListener('change', (e) => {
         const checked = e.target.checked;
         if (allowProfanity) allowProfanity.checked = checked;
-        saveSatireSettings(parseInt(satireLevelMobile?.value || 1), checked);
+        saveSatireSettings(parseInt(satireLevelMobile?.value || 1), checked, snowflakeMode?.checked || false);
         
         if (checked) {
             profanityWarning?.classList.remove('hidden');
