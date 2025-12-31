@@ -28,6 +28,7 @@ export function getSatiricalLine(level, allowProfanity) {
             "Wow. One whole Pomodoro. Your ancestors would be SO proud.",
             "Ladies and gentlemen, they didn't check their phone. Historic."
         ],
+        
         3: allowProfanity ? [
             "Holy shit, you actually did it. Hell might freeze over, you lazy fuck.",
             "Un-fucking-believable. You stayed focused. What's your secret? Adderall?",

@@ -4,6 +4,7 @@ import { getSatiricalLine, getSatireSettings } from './satire.js';
 let currentUser = null;
 let deadlineCheckInterval = null;
 
+
 /**
  * Check for overdue tasks and show satire
  */
