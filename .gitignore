@@ -2,7 +2,7 @@
 .env
 .env.local
 .env.production
-# env-config.js - COMMENTED OUT: anon key is safe to commit
+env-config.js
 
 # Ignore OS files
 .DS_Store
