@@ -149,3 +149,20 @@ export async function initSatireSettings() {
 export function syncSettings() {
     initSatireSettings();
 }
+
+const originalTitle = document.title;
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        const insults = [
+            "GET BACK HERE!",
+            "STOP SLACKING!",
+            "YOU ARE FAILING!",
+            "PATHETIC COWARD",
+            "STILL A LOSER",
+            "WORK, YOU SLACKER"
+        ];
+        document.title = insults[Math.floor(Math.random() * insults.length)];
+    } else {
+        document.title = originalTitle;
+    }
+});

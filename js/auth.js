@@ -61,8 +61,8 @@ if (window.location.pathname.includes('login.html')) {
             window.location.href = '/dashboard.html';
         } catch (error) {
             statusMessage.classList.remove('hidden');
-            statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
-            statusMessage.querySelector('div').textContent = error.message;
+            statusMessage.querySelector('div').className = 'p-4 border-2 border-red-600 bg-red-900/20 text-red-500 font-black uppercase tracking-tighter';
+            statusMessage.querySelector('div').textContent = `ACCESS DENIED: ${error.message.toUpperCase()}. TRY NOT BEING AN IDIOT.`;
         }
     });
     
@@ -74,8 +74,8 @@ if (window.location.pathname.includes('login.html')) {
         
         if (password.length < 6) {
             statusMessage.classList.remove('hidden');
-            statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
-            statusMessage.querySelector('div').textContent = 'Password must be at least 6 characters long.';
+            statusMessage.querySelector('div').className = 'p-4 border-2 border-red-600 bg-red-900/20 text-red-500 font-black uppercase tracking-tighter';
+            statusMessage.querySelector('div').textContent = 'PASSWORD TOO WEAK, JUST LIKE YOUR WILLPOWER. 6 CHARS MINIMUM.';
             return;
         }
         
@@ -88,16 +88,16 @@ if (window.location.pathname.includes('login.html')) {
             if (error) throw error;
             
             statusMessage.classList.remove('hidden');
-            statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-green-900/30 border border-green-700 text-green-300';
-            statusMessage.querySelector('div').textContent = 'Account created! Signing you in...';
+            statusMessage.querySelector('div').className = 'p-4 border-2 border-white bg-gray-800 text-white font-black uppercase tracking-tighter';
+            statusMessage.querySelector('div').textContent = 'ACCOUNT CREATED. PREPARE FOR ETERNAL JUDGMENT.';
             
             setTimeout(() => {
                 window.location.href = '/dashboard.html';
-            }, 1000);
+            }, 1500);
         } catch (error) {
             statusMessage.classList.remove('hidden');
-            statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
-            statusMessage.querySelector('div').textContent = error.message;
+            statusMessage.querySelector('div').className = 'p-4 border-2 border-red-600 bg-red-900/20 text-red-500 font-black uppercase tracking-tighter';
+            statusMessage.querySelector('div').textContent = `SIGNUP FAILED: ${error.message.toUpperCase()}. EVEN THE DATABASE HATES YOU.`;
         }
     });
 }

@@ -64,17 +64,22 @@ async function resetTimer() {
     
     if (isRunning || (timeRemaining > 0 && percentRemaining > 0.1)) {
         const settings = await getSatireSettings();
-        const messages = {
-            0: "Timer reset. You can start over anytime.",
-            1: "Giving up already? Well, at least you're consistent in your failure.",
-            2: "Wow. Just... wow. Couldn't even finish this one, huh? Pathetic.",
-            3: settings.allowProfanity ?
-                "Fucking quitter. Can't even finish a goddamn timer. You're a disgrace." :
-                "Quitting early again? What a surprise. You're absolutely useless."
-        };
         
-        if (percentRemaining > 0.5) {
-            showSatireMessage(messages[settings.level] || messages[1], 'error');
+        if (Math.random() < 0.1) {
+            await showParentalDisappointmentModal();
+        } else {
+            const messages = {
+                0: "Timer reset. You can start over anytime.",
+                1: "Giving up already? Well, at least you're consistent in your failure.",
+                2: "Wow. Just... wow. Couldn't even finish this one, huh? Pathetic.",
+                3: settings.allowProfanity ?
+                    "Fucking quitter. Can't even finish a goddamn timer. You're a disgrace." :
+                    "Quitting early again? What a surprise. You're absolutely useless."
+            };
+            
+            if (percentRemaining > 0.5) {
+                showSatireMessage(messages[settings.level] || messages[1], 'error');
+            }
         }
     }
     
@@ -86,6 +91,37 @@ async function resetTimer() {
     updateDisplay();
     document.getElementById('startBtn').classList.remove('hidden');
     document.getElementById('pauseBtn').classList.add('hidden');
+}
+
+async function showParentalDisappointmentModal() {
+    return new Promise((resolve) => {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4';
+        modal.innerHTML = `
+            <div class="bg-gray-900 border-4 border-white p-10 max-w-md w-full shadow-[20px_20px_0px_0px_rgba(255,255,255,0.1)]">
+                <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                    <span class="text-xs font-black uppercase tracking-widest text-gray-500">New Message: Inbox</span>
+                    <span class="text-xs font-black uppercase tracking-widest text-red-500">Urgent</span>
+                </div>
+                <h2 class="text-2xl font-black text-white uppercase tracking-tighter mb-2">From: Mom & Dad</h2>
+                <p class="text-gray-500 text-xs mb-6 uppercase tracking-widest">Subject: We're not mad, just disappointed</p>
+                
+                <div class="bg-gray-800 p-6 mb-8 border-l-4 border-red-600 italic text-gray-300 text-sm leading-relaxed">
+                    "We saw you quit that timer again. Your cousin is already a senior VP and you can't even sit still for 25 minutes. We're starting to think the neighbors were right about you."
+                </div>
+
+                <button id="closeParentalModal" class="w-full bg-white text-black font-black py-4 uppercase tracking-widest hover:bg-gray-200 transition text-lg">
+                    I'm a failure
+                </button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('closeParentalModal').onclick = () => {
+            modal.remove();
+            resolve();
+        };
+    });
 }
 
 function setPomodoro() {
