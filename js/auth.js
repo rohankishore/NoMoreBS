@@ -1,6 +1,5 @@
 import { supabase } from './supabase.js';
 
-// Check if user is authenticated, redirect to login if not
 export async function checkAuthentication() {
     const { data: { session } } = await supabase.auth.getSession();
     
@@ -12,13 +11,11 @@ export async function checkAuthentication() {
     return session;
 }
 
-// Handle logout
 export async function logout() {
     await supabase.auth.signOut();
     window.location.href = '/login.html';
 }
 
-// Initialize login page
 if (window.location.pathname.includes('login.html')) {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
@@ -26,13 +23,11 @@ if (window.location.pathname.includes('login.html')) {
     const signupTab = document.getElementById('signupTab');
     const statusMessage = document.getElementById('statusMessage');
     
-    // Check if already logged in
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
         window.location.href = '/dashboard.html';
     }
     
-    // Tab switching
     loginTab.addEventListener('click', () => {
         loginForm.classList.remove('hidden');
         signupForm.classList.add('hidden');
@@ -49,7 +44,6 @@ if (window.location.pathname.includes('login.html')) {
         statusMessage.classList.add('hidden');
     });
     
-    // Handle login form submission
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -64,24 +58,20 @@ if (window.location.pathname.includes('login.html')) {
             
             if (error) throw error;
             
-            // Redirect to dashboard
             window.location.href = '/dashboard.html';
         } catch (error) {
-            // Show error message
             statusMessage.classList.remove('hidden');
             statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
             statusMessage.querySelector('div').textContent = error.message;
         }
     });
     
-    // Handle signup form submission
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const email = document.getElementById('signupEmail').value;
         const password = document.getElementById('signupPassword').value;
         
-        // Validate password length
         if (password.length < 6) {
             statusMessage.classList.remove('hidden');
             statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
@@ -97,17 +87,14 @@ if (window.location.pathname.includes('login.html')) {
             
             if (error) throw error;
             
-            // Show success message
             statusMessage.classList.remove('hidden');
             statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-green-900/30 border border-green-700 text-green-300';
             statusMessage.querySelector('div').textContent = 'Account created! Signing you in...';
             
-            // Redirect to dashboard
             setTimeout(() => {
                 window.location.href = '/dashboard.html';
             }, 1000);
         } catch (error) {
-            // Show error message
             statusMessage.classList.remove('hidden');
             statusMessage.querySelector('div').className = 'p-4 rounded-lg text-sm bg-red-900/30 border border-red-700 text-red-300';
             statusMessage.querySelector('div').textContent = error.message;
@@ -115,7 +102,6 @@ if (window.location.pathname.includes('login.html')) {
     });
 }
 
-// Initialize dashboard logout button
 if (window.location.pathname.includes('dashboard.html')) {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {

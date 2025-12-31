@@ -16,7 +16,6 @@
     <script src="./env-config.js"></script>
 </head>
 <body class="dark bg-gray-900 min-h-screen">
-    <!-- Header -->
     <header class="bg-gray-800 border-b border-gray-700">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
@@ -27,21 +26,17 @@
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-16">
-        <!-- Welcome Section -->
         <div class="mb-16">
             <h2 class="text-5xl font-black text-white mb-4 uppercase tracking-tighter">You're still here?</h2>
             <p class="text-gray-400 text-xl">Pick a way to waste less of your pathetic life before you die forgotten:</p>
         </div>
 
-        <!-- Navigation Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
-            <!-- Timer Card -->
             <a href="timer.html" class="group bg-gray-800 p-6 hover:bg-red-900/20 transition-all border border-gray-700 hover:border-red-500">
                 <h3 class="text-xl font-bold text-white mb-1">Suffering Timer</h3>
                 <p class="text-gray-500 text-sm">Sit down and shut up for 25 minutes.</p>
             </a>
 
-            <!-- Tasks Card -->
             <a href="tasks.html" class="group bg-gray-800 p-6 hover:bg-red-900/20 transition-all border border-gray-700 hover:border-red-500">
                 <h3 class="text-xl font-bold text-white mb-1">Your Failures</h3>
                 <p class="text-gray-500 text-sm">List of things you'll never finish.</p>
@@ -54,7 +49,6 @@
             </a>
         </div>
 
-        <!-- Logout Section -->
         <div class="border-t border-gray-800 pt-8">
             <button id="logoutBtn" class="text-gray-600 hover:text-red-500 transition text-sm uppercase tracking-widest font-bold">
                 → Abandon Ship (Logout)
@@ -65,10 +59,8 @@
     <script type="module">
         import { checkAuthentication, logout } from './js/auth.js';
         
-        // Protect dashboard
         await checkAuthentication();
         
-        // Logout button
         document.getElementById('logoutBtn')?.addEventListener('click', logout);
     </script>
 </body>
