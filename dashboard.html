@@ -13,357 +13,104 @@
             }
         }
     </script>
-    <!-- Load environment variables -->
     <script src="./env-config.js"></script>
-    <style>
-        /* Slide-in menu animation */
-        .menu-slide-enter {
-            transform: translateX(-100%);
-        }
-        .menu-slide-enter-active {
-            transform: translateX(0);
-            transition: transform 0.3s ease-out;
-        }
-        /* Bottom nav for mobile */
-        @media (max-width: 768px) {
-            .bottom-nav {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-            }
-            /* Hide menu sections on desktop */
-            #desktopMenu {
-                display: block !important;
-            }
-        }
-        /* Desktop: always show as sidebar when open */
-        @media (min-width: 769px) {
-            /* Hide mobile-only views on desktop */
-            #mobileTasksView,
-            #mobileSettingsView {
-                display: none !important;
-            }
-        }
-    </style>
 </head>
-<body class="dark bg-gray-900 min-h-screen pb-20 md:pb-0">
-    <!-- Desktop: Hamburger Menu Button -->
-    <button id="menuToggle" class="hidden md:block fixed top-4 left-4 z-50 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-lg transition">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
-
-    <!-- Desktop: Slide-out Menu -->
-    <div id="desktopMenu" class="hidden md:block fixed top-0 left-0 h-full w-80 bg-gray-800 shadow-2xl z-40 transform -translate-x-full transition-transform duration-300">
-        <div class="p-6 h-full overflow-y-auto">
-            <!-- Menu Header -->
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold text-purple-500">NoMoreBS</h2>
-                <button id="closeMenu" class="text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
+<body class="dark bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-purple-500 mb-2">NoMoreBS</h1>
+                <p class="text-gray-400 text-lg">Satirical Productivity - No Bullshit, Just Results</p>
             </div>
+        </div>
+    </header>
 
-            <!-- Menu Content -->
-            <div class="space-y-6">
-                <!-- Settings Section -->
-                <section>
-                    <h3 class="text-lg font-bold text-white mb-3">Satire Settings</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-2">
-                                Satire Level: <span id="satireLevelDisplay" class="text-purple-400">1</span>
-                            </label>
-                            <input 
-                                type="range" 
-                                id="satireLevel" 
-                                min="0" 
-                                max="3" 
-                                value="1"
-                                class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
-                            >
-                            <div class="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>Polite</span>
-                                <span>Mild</span>
-                                <span>Sarcastic</span>
-                                <span>Aggressive</span>
-                            </div>
-                        </div>
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Welcome Section -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">Welcome Back!</h2>
+            <p class="text-gray-400 text-lg">Choose where you want to go:</p>
+        </div>
 
-                        <div class="flex items-center justify-between">
-                            <label for="allowProfanity" class="text-sm font-medium text-gray-300">
-                                Allow strong language
-                            </label>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="allowProfanity" class="sr-only peer">
-                                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-                            </label>
-                        </div>
-
-                        <div id="profanityWarning" class="hidden p-3 bg-yellow-900/30 border border-yellow-700 rounded-lg">
-                            <p class="text-yellow-300 text-sm">
-                                ⚠️ This mode uses exaggerated, satirical language. It's optional, and you can turn it off anytime.
-                            </p>
-                        </div>
+        <!-- Navigation Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Timer Card -->
+            <a href="timer.html" class="group bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all hover:scale-105 border-2 border-transparent hover:border-purple-500 shadow-lg">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 transition">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
                     </div>
-                </section>
+                    <h3 class="text-2xl font-bold text-white mb-2">Focus Timer</h3>
+                    <p class="text-gray-400">Stay focused and get shit done</p>
+                </div>
+            </a>
 
-                <!-- Todo Section -->
-                <section>
-                    <h3 class="text-lg font-bold text-white mb-3">Tasks</h3>
-                    
-                    <form id="addTodoForm" class="mb-4">
-                        <div class="space-y-2">
-                            <input 
-                                type="text" 
-                                id="todoInput" 
-                                placeholder="Task title..."
-                                required
-                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
-                            >
-                            <input 
-                                type="datetime-local" 
-                                id="todoDeadline" 
-                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
-                            >
-                            <button 
-                                type="submit"
-                                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
-                            >
-                                Add Task
-                            </button>
-                        </div>
-                    </form>
-
-                    <div id="todoList" class="space-y-2 max-h-96 overflow-y-auto">
-                        <div class="text-center text-gray-400 py-4 text-sm">Loading...</div>
+            <!-- Tasks Card -->
+            <a href="tasks.html" class="group bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all hover:scale-105 border-2 border-transparent hover:border-purple-500 shadow-lg">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 transition">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
                     </div>
-                </section>
+                    <h3 class="text-2xl font-bold text-white mb-2">Your Tasks</h3>
+                    <p class="text-gray-400">Manage your to-do list</p>
+                </div>
+            </a>
 
-                <!-- Logout -->
-                <button id="logoutBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition">
-                    Logout
-                </button>
-            </div>
+            <!-- Settings Card -->
+            <a href="settings.html" class="group bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all hover:scale-105 border-2 border-transparent hover:border-purple-500 shadow-lg">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 transition">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Settings</h3>
+                    <p class="text-gray-400">Customize satire level</p>
+                </div>
+            </a>
         </div>
-    </div>
 
-    <!-- Mobile: Bottom Navigation -->
-    <div class="md:hidden bottom-nav bg-gray-800 border-t border-gray-700 z-50">
-        <div class="flex justify-around items-center py-2">
-            <button id="mobileTasksBtn" class="flex flex-col items-center py-2 px-4 text-gray-400 hover:text-purple-500 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                </svg>
-                <span class="text-xs mt-1">Tasks</span>
-            </button>
-            <button id="mobileTimerBtn" class="flex flex-col items-center py-2 px-4 text-purple-500 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span class="text-xs mt-1">Timer</span>
-            </button>
-            <button id="mobileSettingsBtn" class="flex flex-col items-center py-2 px-4 text-gray-400 hover:text-purple-500 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                <span class="text-xs mt-1">Settings</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Mobile: Fullscreen Views -->
-    <div id="mobileTasksView" class="md:hidden hidden fixed inset-0 bg-gray-900 z-30 overflow-y-auto p-4">
-        <div class="mb-4">
-            <h2 class="text-2xl font-bold text-white">Tasks</h2>
-        </div>
-        <form id="addTodoFormMobile" class="mb-4 bg-gray-800 p-4 rounded-lg">
-            <div class="space-y-3">
-                <input 
-                    type="text" 
-                    id="todoInputMobile" 
-                    placeholder="Task title..."
-                    required
-                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                <input 
-                    type="datetime-local" 
-                    id="todoDeadlineMobile" 
-                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                >
-                <button 
-                    type="submit"
-                    class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition"
-                >
-                    Add Task
-                </button>
-            </div>
-        </form>
-        <div id="todoListMobile" class="space-y-2">
-            <div class="text-center text-gray-400 py-8">Loading...</div>
-        </div>
-    </div>
-
-    <div id="mobileSettingsView" class="md:hidden hidden fixed inset-0 bg-gray-900 z-30 overflow-y-auto p-4">
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold text-white">Settings</h2>
-        </div>
-        <div class="bg-gray-800 p-6 rounded-lg space-y-6">
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">
-                    Satire Level: <span id="satireLevelDisplayMobile" class="text-purple-400">1</span>
-                </label>
-                <input 
-                    type="range" 
-                    id="satireLevelMobile" 
-                    min="0" 
-                    max="3" 
-                    value="1"
-                    class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
-                >
-                <div class="flex justify-between text-xs text-gray-400 mt-1">
-                    <span>Polite</span>
-                    <span>Mild</span>
-                    <span>Sarcastic</span>
-                    <span>Aggressive</span>
+        <!-- Quick Stats -->
+        <div class="bg-gray-800 rounded-2xl p-8 mb-8">
+            <h3 class="text-xl font-bold text-white mb-6 text-center">Quick Overview</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-purple-500 mb-2">⏱️</div>
+                    <p class="text-gray-400">Focus & Concentrate</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-purple-500 mb-2">✅</div>
+                    <p class="text-gray-400">Complete Tasks</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-purple-500 mb-2">🎯</div>
+                    <p class="text-gray-400">Achieve Goals</p>
                 </div>
             </div>
+        </div>
 
-            <div class="flex items-center justify-between">
-                <label for="allowProfanityMobile" class="text-sm font-medium text-gray-300">
-                    Allow strong language
-                </label>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="allowProfanityMobile" class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-                </label>
-            </div>
-
-            <div id="profanityWarningMobile" class="hidden p-3 bg-yellow-900/30 border border-yellow-700 rounded-lg">
-                <p class="text-yellow-300 text-sm">
-                    ⚠️ This mode uses exaggerated, satirical language. It's optional, and you can turn it off anytime.
-                </p>
-            </div>
-
-            <button id="logoutBtnMobile" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition">
+        <!-- Logout Section -->
+        <div class="text-center">
+            <button id="logoutBtn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-lg transition text-lg">
                 Logout
             </button>
-        </div>
-    </div>
-
-    <!-- Main Timer View (Always visible unless on mobile tasks/settings) -->
-    <main id="timerView" class="flex items-center justify-center min-h-screen px-4 md:pl-0">
-        <div class="w-full max-w-md">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl md:text-4xl font-bold text-purple-500 mb-2">Focus Timer</h1>
-                <p class="text-gray-400 text-sm">Stay focused, get shit done</p>
-            </div>
-
-            <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 md:p-12">
-                <div class="text-center">
-                    <div id="timerDisplay" class="text-7xl md:text-8xl font-bold text-purple-500 mb-8 font-mono">
-                        00:10
-                    </div>
-                    
-                    <div class="flex gap-4 justify-center mb-6">
-                        <button id="startBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-xl transition text-lg">
-                            Start
-                        </button>
-                        <button id="pauseBtn" class="flex-1 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-4 px-6 rounded-xl transition text-lg hidden">
-                            Pause
-                        </button>
-                        <button id="resetBtn" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-4 px-6 rounded-xl transition text-lg">
-                            Reset
-                        </button>
-                    </div>
-
-                    <!-- Satirical Message -->
-                    <div id="timerMessage" class="p-4 bg-gray-700 rounded-lg text-white text-base md:text-lg font-medium hidden"></div>
-                </div>
-            </div>
         </div>
     </main>
 
     <script type="module">
         import { checkAuthentication, logout } from './js/auth.js';
-        import { initTodos } from './js/todos.js';
-        import { initTimer } from './js/timer.js';
-        import { syncSettings } from './js/satire.js';
         
         // Protect dashboard
         await checkAuthentication();
         
-        // Desktop menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const desktopMenu = document.getElementById('desktopMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        
-        menuToggle?.addEventListener('click', () => {
-            desktopMenu.classList.remove('-translate-x-full');
-        });
-        
-        closeMenu?.addEventListener('click', () => {
-            desktopMenu.classList.add('-translate-x-full');
-        });
-        
-        // Mobile navigation
-        const mobileTasksBtn = document.getElementById('mobileTasksBtn');
-        const mobileTimerBtn = document.getElementById('mobileTimerBtn');
-        const mobileSettingsBtn = document.getElementById('mobileSettingsBtn');
-        const timerView = document.getElementById('timerView');
-        const tasksView = document.getElementById('mobileTasksView');
-        const settingsView = document.getElementById('mobileSettingsView');
-        
-        function showView(view) {
-            // Hide all mobile views
-            timerView?.classList.add('hidden');
-            tasksView?.classList.add('hidden');
-            settingsView?.classList.add('hidden');
-            
-            // Show selected view
-            view?.classList.remove('hidden');
-            
-            // Update nav button states
-            const buttons = [mobileTasksBtn, mobileTimerBtn, mobileSettingsBtn];
-            buttons.forEach(btn => {
-                if (btn) {
-                    btn.classList.remove('text-purple-500');
-                    btn.classList.add('text-gray-400');
-                }
-            });
-        }
-        
-        mobileTasksBtn?.addEventListener('click', () => {
-            showView(tasksView);
-            mobileTasksBtn.classList.remove('text-gray-400');
-            mobileTasksBtn.classList.add('text-purple-500');
-        });
-        
-        mobileTimerBtn?.addEventListener('click', () => {
-            showView(timerView);
-            mobileTimerBtn.classList.remove('text-gray-400');
-            mobileTimerBtn.classList.add('text-purple-500');
-        });
-        
-        mobileSettingsBtn?.addEventListener('click', () => {
-            showView(settingsView);
-            mobileSettingsBtn.classList.remove('text-gray-400');
-            mobileSettingsBtn.classList.add('text-purple-500');
-        });
-        
-        // Logout buttons
+        // Logout button
         document.getElementById('logoutBtn')?.addEventListener('click', logout);
-        document.getElementById('logoutBtnMobile')?.addEventListener('click', logout);
-        
-        // Initialize features
-        initTodos();
-        initTimer();
-        syncSettings();
     </script>
 </body>
 </html>

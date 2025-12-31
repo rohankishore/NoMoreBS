@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer - NoMoreBS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    <script src="./env-config.js"></script>
+</head>
+<body class="dark bg-gray-900 min-h-screen">
+    <!-- Header with navigation -->
+    <header class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-purple-500">NoMoreBS</h1>
+                <nav class="flex gap-4">
+                    <a href="dashboard.html" class="text-gray-400 hover:text-white transition">Dashboard</a>
+                    <a href="timer.html" class="text-purple-500 font-semibold">Timer</a>
+                    <a href="tasks.html" class="text-gray-400 hover:text-white transition">Tasks</a>
+                    <a href="settings.html" class="text-gray-400 hover:text-white transition">Settings</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
+        <div class="w-full max-w-2xl">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl md:text-5xl font-bold text-purple-500 mb-3">Focus Timer</h2>
+                <p class="text-gray-400 text-lg">Stay focused, get shit done</p>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 md:p-16">
+                <div class="text-center">
+                    <!-- Timer Display -->
+                    <div id="timerDisplay" class="text-8xl md:text-9xl font-bold text-purple-500 mb-12 font-mono tracking-tight">
+                        00:10
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="flex gap-4 justify-center mb-8">
+                        <button id="startBtn" class="flex-1 max-w-[200px] bg-green-600 hover:bg-green-700 text-white font-semibold py-5 px-8 rounded-xl transition text-xl shadow-lg hover:shadow-xl">
+                            Start
+                        </button>
+                        <button id="pauseBtn" class="flex-1 max-w-[200px] bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-5 px-8 rounded-xl transition text-xl shadow-lg hover:shadow-xl hidden">
+                            Pause
+                        </button>
+                        <button id="resetBtn" class="flex-1 max-w-[200px] bg-gray-600 hover:bg-gray-700 text-white font-semibold py-5 px-8 rounded-xl transition text-xl shadow-lg hover:shadow-xl">
+                            Reset
+                        </button>
+                    </div>
+
+                    <!-- Satirical Message -->
+                    <div id="timerMessage" class="p-6 bg-gray-700 rounded-xl text-white text-lg md:text-xl font-medium min-h-[80px] flex items-center justify-center hidden"></div>
+                </div>
+            </div>
+
+            <!-- Quick Tips -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <div class="text-3xl mb-2">🎯</div>
+                    <h3 class="text-white font-semibold mb-1">Focus Mode</h3>
+                    <p class="text-gray-400 text-sm">Minimize distractions</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <div class="text-3xl mb-2">⏱️</div>
+                    <h3 class="text-white font-semibold mb-1">Timed Sessions</h3>
+                    <p class="text-gray-400 text-sm">Work in focused bursts</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <div class="text-3xl mb-2">💪</div>
+                    <h3 class="text-white font-semibold mb-1">Build Discipline</h3>
+                    <p class="text-gray-400 text-sm">One session at a time</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { checkAuthentication } from './js/auth.js';
+        import { initTimer } from './js/timer.js';
+        
+        // Protect page
+        await checkAuthentication();
+        
+        // Initialize timer
+        initTimer();
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - NoMoreBS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    <script src="./env-config.js"></script>
+</head>
+<body class="dark bg-gray-900 min-h-screen">
+    <!-- Header with navigation -->
+    <header class="bg-gray-800 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-purple-500">NoMoreBS</h1>
+                <nav class="flex gap-4">
+                    <a href="dashboard.html" class="text-gray-400 hover:text-white transition">Dashboard</a>
+                    <a href="timer.html" class="text-gray-400 hover:text-white transition">Timer</a>
+                    <a href="tasks.html" class="text-gray-400 hover:text-white transition">Tasks</a>
+                    <a href="settings.html" class="text-purple-500 font-semibold">Settings</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-white mb-2">Satire Settings</h2>
+            <p class="text-gray-400">Customize how brutally honest you want the app to be</p>
+        </div>
+
+        <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 space-y-8">
+            <!-- Satire Level -->
+            <div>
+                <label class="block text-lg font-medium text-gray-300 mb-4">
+                    Satire Level: <span id="satireLevelDisplay" class="text-purple-400 font-bold">1</span>
+                </label>
+                <input 
+                    type="range" 
+                    id="satireLevel" 
+                    min="0" 
+                    max="3" 
+                    value="1"
+                    class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                >
+                <div class="flex justify-between text-sm text-gray-400 mt-2">
+                    <span>😊 Polite</span>
+                    <span>😐 Mild</span>
+                    <span>😏 Sarcastic</span>
+                    <span>😤 Aggressive</span>
+                </div>
+            </div>
+
+            <!-- Allow Profanity -->
+            <div class="flex items-center justify-between p-4 bg-gray-700 rounded-lg">
+                <div>
+                    <label for="allowProfanity" class="text-lg font-medium text-gray-300 block">
+                        Allow strong language
+                    </label>
+                    <p class="text-sm text-gray-400 mt-1">Enable satirical profanity for extra spice</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="allowProfanity" class="sr-only peer">
+                    <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-purple-600"></div>
+                </label>
+            </div>
+
+            <!-- Warning -->
+            <div id="profanityWarning" class="hidden p-4 bg-yellow-900/30 border border-yellow-700 rounded-lg">
+                <div class="flex items-start gap-3">
+                    <svg class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <div>
+                        <h4 class="text-yellow-300 font-semibold mb-1">Fair Warning</h4>
+                        <p class="text-yellow-300 text-sm">
+                            This mode uses exaggerated, satirical language. It's optional, and you can turn it off anytime.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logout Button -->
+            <div class="pt-4 border-t border-gray-700">
+                <button id="logoutBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition text-lg">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { checkAuthentication, logout } from './js/auth.js';
+        import { syncSettings } from './js/satire.js';
+        
+        // Protect page
+        await checkAuthentication();
+        
+        // Initialize settings
+        syncSettings();
+        
+        // Logout
+        document.getElementById('logoutBtn')?.addEventListener('click', logout);
+    </script>
+</body>
+</html>
