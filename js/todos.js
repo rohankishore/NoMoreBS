@@ -102,8 +102,9 @@ async function loadTodos() {
     } catch (error) {
         console.error('Error loading todos:', error);
         todoList.innerHTML = `
-            <div class="text-center text-red-400 py-8">
-                Error loading tasks: ${error.message}
+            <div class="text-center text-red-600 py-20 border-4 border-red-600 font-black uppercase tracking-tighter">
+                <div class="text-4xl mb-4">SYSTEM FAILURE</div>
+                <div class="text-xl">Even the database is tired of your bullshit: ${error.message}</div>
             </div>
         `;
     }
@@ -124,26 +125,24 @@ function renderTodoItem(todo) {
     }) : '';
     
     return `
-        <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm border-2 ${isOverdue ? 'border-red-400' : 'border-white/20'} p-4 rounded-2xl group hover:bg-white/15 transition" data-todo-id="${todo.id}">
+        <div class="flex items-center gap-4 bg-gray-800 border ${isOverdue ? 'border-red-600' : 'border-gray-700'} p-6 group hover:border-red-500 transition" data-todo-id="${todo.id}">
             <input 
                 type="checkbox" 
                 ${todo.completed ? 'checked' : ''}
-                class="todo-checkbox w-6 h-6 rounded-full border-2 border-white/40 text-purple-600 focus:ring-2 focus:ring-white/40 cursor-pointer flex-shrink-0 bg-transparent"
+                class="todo-checkbox w-8 h-8 border-2 border-gray-600 text-red-600 focus:ring-0 cursor-pointer flex-shrink-0 bg-gray-900 rounded-none appearance-none checked:bg-red-600"
             >
             <div class="flex-1 min-w-0">
-                <span class="block text-white text-base ${todo.completed ? 'line-through text-gray-400' : ''}">
+                <span class="block text-white text-xl font-black uppercase tracking-tighter ${todo.completed ? 'line-through text-gray-600' : ''}">
                     ${escapeHtml(todo.title)}
                 </span>
                 ${deadline ? `
-                    <span class="block text-sm mt-1 ${isOverdue ? 'text-red-300 font-medium' : 'text-gray-300'}">
-                        ${isOverdue ? '⚠️ ' : ''}${deadlineText}${isOverdue ? ' - OVERDUE' : ''}
+                    <span class="block text-xs mt-1 uppercase tracking-widest font-bold ${isOverdue ? 'text-red-500' : 'text-gray-500'}">
+                        ${isOverdue ? '⚠️ DEADLINE MISSED: ' : ''}${deadlineText}
                     </span>
                 ` : ''}
             </div>
-            <button class="todo-delete opacity-0 group-hover:opacity-100 text-red-300 hover:text-red-200 transition flex-shrink-0 p-2 hover:bg-red-500/20 rounded-full">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
+            <button class="todo-delete opacity-0 group-hover:opacity-100 text-gray-600 hover:text-red-500 transition flex-shrink-0 p-2 uppercase text-xs font-black tracking-widest">
+                Delete
             </button>
         </div>
     `;
@@ -184,12 +183,71 @@ async function addTodo(title, deadline = null) {
 }
 
 /**
+ * Show a modal asking if the user is lying about finishing a task
+ */
+async function showCompletionModal() {
+    return new Promise((resolve) => {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4';
+        modal.innerHTML = `
+            <div class="bg-gray-900 border-4 border-red-600 p-10 max-w-md w-full text-center shadow-[20px_20px_0px_0px_rgba(220,38,38,0.3)]">
+                <h2 class="text-4xl font-black text-white uppercase tracking-tighter mb-6">Wait a fucking second.</h2>
+                <p class="text-gray-400 text-sm mb-10 font-black uppercase tracking-widest leading-relaxed">Did you actually finish this task, or are you just fucking lying to feel better about your pathetic existence?</p>
+                <div class="flex flex-col gap-4">
+                    <button id="lyingBtn" class="w-full bg-red-600 text-white font-black py-5 uppercase tracking-widest hover:bg-red-700 transition text-lg">
+                        I'm fucking lying
+                    </button>
+                    <button id="truthBtn" class="w-full bg-white text-black font-black py-5 uppercase tracking-widest hover:bg-gray-200 transition text-lg">
+                        I actually did it
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('lyingBtn').onclick = () => {
+            modal.remove();
+            resolve('lying');
+        };
+        document.getElementById('truthBtn').onclick = () => {
+            modal.remove();
+            resolve('truth');
+        };
+    });
+}
+
+/**
  * Toggle todo completion
  */
 async function toggleTodo(todoId, completed) {
     try {
         // Clear notification flag when completing
         if (completed) {
+            const result = await showCompletionModal();
+            const settings = await getSatireSettings();
+            
+            if (result === 'lying') {
+                const messages = {
+                    0: "You're lying. How pathetic.",
+                    1: "Lying to a productivity app? You've reached a new low.",
+                    2: "Wow. Not only are you lazy, you're a dishonest piece of shit too.",
+                    3: settings.allowProfanity ? 
+                        "You're a fucking disgrace. Lying about work? Go fuck yourself." :
+                        "You're a total fraud. A pathetic, lying excuse for a human being."
+                };
+                showNotification(messages[settings.level] || messages[1], 'error');
+            } else {
+                const messages = {
+                    0: "Task completed.",
+                    1: "You actually did it. Want a medal, you big baby?",
+                    2: "Miracles do happen. You finished one (1) task. Don't get used to it.",
+                    3: settings.allowProfanity ? 
+                        "Holy shit, you actually worked. About fucking time, you lazy prick." :
+                        "Look at you, acting like a functional adult for five seconds. Cute."
+                };
+                showNotification(messages[settings.level] || messages[1], 'info');
+            }
+            
             localStorage.removeItem(`notified_${todoId}`);
         }
         
@@ -242,7 +300,7 @@ function attachTodoEventListeners() {
     document.querySelectorAll('.todo-delete').forEach(button => {
         button.addEventListener('click', (e) => {
             const todoId = e.target.closest('[data-todo-id]').dataset.todoId;
-            if (confirm('Delete this task?')) {
+            if (confirm('Are you really going to delete this task? Giving up already, you weak piece of shit?')) {
                 deleteTodo(todoId);
             }
         });
