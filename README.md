@@ -1,13 +1,22 @@
+<div align="center">
+
 <img width="385" height="206" alt="LOGO" src="https://github.com/user-attachments/assets/a2de034c-6080-471f-83c6-e7d17dba3ecc" />
 
-# NoMoreBS: The Only App That Doesn't Give a Fuck About Your Feelings
+
+<br>
+<br>
+<br>
+<br>
 
 <a href="https://nomorebs.vercel.app/">GET BACK TO FUCKING WORK!</a>
 
 <br>
 <br>
 
-## Why are you even reading this?
+</div>
+
+
+# Why are you even reading this?
 
 Are you looking for a "gentle" productivity app? A "mindful" meditation tool? A "supportive" community? 
 
