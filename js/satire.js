@@ -29,19 +29,27 @@ export function getSatiricalLine(level, allowProfanity) {
             "Ladies and gentlemen, they didn't check their phone. Historic."
         ],
         3: allowProfanity ? [
-            "Holy shit, you actually did it. Hell might freeze over.",
-            "Un-fucking-believable. You stayed focused. What's your secret?",
-            "Well fuck me sideways, you completed a task like an adult.",
-            "No fucking way. Did you seriously just work for 25 minutes straight?",
-            "Damn! Look who decided to be productive. About fucking time.",
-            "Jesus Christ, you did it. Maybe you're not hopeless after all."
+            "Holy shit, you actually did it. Hell might freeze over, you lazy fuck.",
+            "Un-fucking-believable. You stayed focused. What's your secret? Adderall?",
+            "Well fuck me sideways, you completed a task like a semi-functional adult.",
+            "No fucking way. Did you seriously just work for 25 minutes without crying?",
+            "Damn! Look who decided to stop being a useless drain on society. About fucking time.",
+            "Jesus Christ, you did it. Maybe you're not a complete waste of oxygen after all.",
+            "Look at you, pretending to have a future. It's almost cute, you pathetic shit.",
+            "Wow, 25 minutes. Your parents might actually stop being ashamed of you for five seconds.",
+            "Congratulations. You've achieved what a trained monkey could do in half the time.",
+            "Is this a joke? You actually finished? I had money on you giving up in three minutes."
         ] : [
-            "Absolutely shocking. You worked instead of doom-scrolling.",
-            "Unbelievable. You resisted every distraction. Who are you?",
-            "This is wild. You actually acted like a functional human.",
-            "Stop the presses! Someone completed a task without 50 breaks.",
-            "Damn! Look who decided to be productive for once.",
-            "Are you feeling okay? You just... worked. Voluntarily."
+            "Absolutely shocking. You worked instead of being a total disappointment.",
+            "Unbelievable. You resisted every distraction. Who are you and what did you do with the loser?",
+            "This is wild. You actually acted like a functional human for once. Don't get used to it.",
+            "Stop the presses! Someone completed a task without needing a participation trophy.",
+            "Damn! Look who decided to be productive for once. The bar was on the floor and you cleared it.",
+            "Are you feeling okay? You just... worked. Voluntarily. It's terrifying.",
+            "Incredible. You actually did something useful. I'm sure it won't last.",
+            "Wow. You finished a task. Do you want a gold star and a nap, you big baby?",
+            "Look at you go. One whole task. You're basically a CEO now, aren't you?",
+            "I'm genuinely surprised you didn't find a way to screw this up. Bravo."
         ]
     };
     

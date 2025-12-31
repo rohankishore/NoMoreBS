@@ -84,11 +84,11 @@ async function resetTimer() {
         const settings = await getSatireSettings();
         const messages = {
             0: "Timer reset. You can start over anytime.",
-            1: "Giving up already? Well, at least you're consistent.",
-            2: "Wow. Just... wow. Couldn't even finish this one, huh?",
+            1: "Giving up already? Well, at least you're consistent in your failure.",
+            2: "Wow. Just... wow. Couldn't even finish this one, huh? Pathetic.",
             3: settings.allowProfanity ?
-                "Fucking quitter. Can't even finish a goddamn timer." :
-                "Quitting early again? What a surprise. Absolutely shocking."
+                "Fucking quitter. Can't even finish a goddamn timer. You're a disgrace." :
+                "Quitting early again? What a surprise. You're absolutely useless."
         };
         
         if (percentRemaining > 0.5) { // More than 50% remaining

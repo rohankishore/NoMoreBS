@@ -29,11 +29,11 @@ async function checkOverdueTasks() {
             if (!localStorage.getItem(notifiedKey)) {
                 const messages = {
                     0: `Your deadline for "${todo.title}" has passed.`,
-                    1: `Oh look, you missed the deadline for "${todo.title}". Shocking.`,
-                    2: `Breaking news: Another deadline missed. "${todo.title}" is now officially late.`,
+                    1: `Oh look, you missed the deadline for "${todo.title}". Shocking. Truly.`,
+                    2: `Breaking news: Another deadline missed. "${todo.title}" is now officially a monument to your incompetence.`,
                     3: settings.allowProfanity ? 
-                        `Are you fucking kidding me? "${todo.title}" was due ages ago!` :
-                        `Seriously? "${todo.title}" was due and you just... ignored it?`
+                        `Are you fucking kidding me? "${todo.title}" was due ages ago, you lazy piece of shit!` :
+                        `Seriously? "${todo.title}" was due and you just... ignored it? You're a total failure.`
                 };
                 
                 showNotification(messages[settings.level] || messages[1], 'error');
@@ -85,7 +85,7 @@ async function loadTodos() {
         if (data.length === 0) {
             const emptyHTML = `
                 <div class="text-center text-gray-300 py-12 text-base">
-                    No tasks yet. Add one above!
+                    No tasks yet. Add one above, if you're even capable of doing anything.
                 </div>
             `;
             todoList.innerHTML = emptyHTML;
