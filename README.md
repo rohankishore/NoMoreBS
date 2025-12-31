@@ -38,6 +38,25 @@ NoMoreBS is for people who are tired of being lazy pieces of shit. We don't do "
 ### Installation:
 If you're too stupid to figure out how to run a basic web app, you're exactly why this app exists.
 
+1. **Clone the repo** (if you can figure out how to use git).
+2. **Create a Supabase project** at [supabase.com](https://supabase.com).
+3. **Set up your keys:** Open `env-config.js` and paste your URL and Anon Key. If you commit these keys to a public repo, you deserve to have your database deleted.
+4. **Enable Auth:** Enable Email/Password auth in Supabase.
+5. **Create the Table:** Run this SQL in your Supabase SQL Editor:
+   ```sql
+   create table todos (
+     id uuid default uuid_generate_v4() primary key,
+     user_id uuid references auth.users not null,
+     title text not null,
+     completed boolean default false,
+     deadline timestamp with time zone,
+     created_at timestamp with time zone default timezone('utc'::text, now()) not null
+   );
+   alter table todos enable row level security;
+   create policy "Users can manage their own todos" on todos for all using (auth.uid() = user_id);
+   ```
+6. **Open index.html** and stop being a loser.
+
 ---
 
 *Disclaimer: If you're offended, good. That's the point. Now go do something useful for once.*
