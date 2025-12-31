@@ -33,7 +33,12 @@ export function getSatiricalLine(level, allowProfanity) {
             "Look at you, pretending to have a future. It's almost cute, you pathetic shit.",
             "Wow, 25 minutes. Your parents might actually stop being ashamed of you for five seconds.",
             "Congratulations. You've achieved what a trained monkey could do in half the time.",
-            "Is this a joke? You actually finished? I had money on you giving up in three minutes."
+            "Is this a joke? You actually finished? I had money on you giving up in three minutes.",
+            "You finished? Great. Now go take a shower, you smell like failure and unwashed laundry.",
+            "I'm genuinely shocked you didn't die of a heart attack from the sheer effort of focusing.",
+            "Look at you, a real-life productive human. Too bad it's only for 25 minutes a day.",
+            "You're like a participation trophy in human form. Pathetic, but technically present.",
+            "Did you want a cookie? Or maybe a hug from the father who clearly never loved you?"
         ] : [
             "Absolutely shocking. You worked instead of being a total disappointment.",
             "Unbelievable. You resisted every distraction. Who are you and what did you do with the loser?",
@@ -44,7 +49,12 @@ export function getSatiricalLine(level, allowProfanity) {
             "Incredible. You actually did something useful. I'm sure it won't last.",
             "Wow. You finished a task. Do you want a gold star and a nap, you big baby?",
             "Look at you go. One whole task. You're basically a CEO now, aren't you?",
-            "I'm genuinely surprised you didn't find a way to screw this up. Bravo."
+            "I'm genuinely surprised you didn't find a way to screw this up. Bravo.",
+            "You actually finished. I'm sure your imaginary friends are very proud.",
+            "Wow, 25 minutes of focus. That's almost as long as your last relationship lasted.",
+            "You're doing great! For a person with the attention span of a goldfish.",
+            "Is this what success feels like? It looks a lot like 'barely trying' from here.",
+            "Congratulations on being slightly less of a disappointment today."
         ]
     };
     

@@ -28,13 +28,18 @@ NoMoreBS is for people who are tired of being lazy pieces of shit. We don't do "
 ### Features:
 - **Focus Timer:** A timer that insults you if you stop.
 - **Task List:** A list of things you'll probably fail to do.
+- **Truth-Check:** A modal that asks if you're fucking lying about finishing a task.
+- **Parental Disappointment:** A 10% chance of receiving a shaming email from "parents" when you reset the timer.
 - **Satire Levels:** From "Mild Disappointment" to "Total Emotional Destruction."
-- **Zero Support:** If you have a problem, it's probably your fault.
+- **Zero Support:** A "Report Issue" button that sends your complaints directly to the void.
 
-### How to use:
-1. Stop being a loser.
-2. Open the app.
-3. Do your fucking work.
+### Technical Requirements for Idiots
+
+If you clone this and the screen turns red and calls you a moron, it's because you didn't set up your Supabase keys.
+
+1.  **Get your keys** from [Supabase](https://supabase.com).
+2.  **Edit `env-config.js`** and paste them in.
+3.  **Don't commit your keys** to your own repo. I've already added it to `.gitignore` because I know you'd forget.
 
 ### Deployment for Lazy People (The "Pro" Way)
 
