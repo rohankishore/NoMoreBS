@@ -93,10 +93,11 @@
 
     <script type="module">
         import { checkAuthentication, logout } from './js/auth.js';
-        import { initSatireSettings } from './js/satire.js';
+        import { initSatireSettings, initSupport } from './js/satire.js';
         
         await checkAuthentication();
         initSatireSettings();
+        initSupport();
         
         document.getElementById('logoutBtn')?.addEventListener('click', logout);
     </script>

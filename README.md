@@ -41,3 +41,20 @@ If you're too stupid to figure out how to run a basic web app, you're exactly wh
 ---
 
 *Disclaimer: If you're offended, good. That's the point. Now go do something useful for once.*
+
+## Contributing (If you're not useless)
+
+Think you're funny? Think you can hurt feelings better than I can? Prove it.
+
+We're looking for:
+- **More Insults:** The current ones are getting too "nice." We need stuff that actually makes people want to delete their accounts.
+- **Hostile Features:** Anything that makes the user experience more miserable and productive.
+- **Bug Fixes:** If you find a bug, fix it yourself. Don't open an issue like a little bitch.
+
+**How to contribute:**
+1. Fork this repo (if you even know how).
+2. Add your creative verbal abuse.
+3. Open a Pull Request.
+4. If your insults are weak, I'll close it and block you.
+
+Now go away.

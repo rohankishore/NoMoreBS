@@ -150,6 +150,68 @@ export function syncSettings() {
     initSatireSettings();
 }
 
+export function initSupport() {
+    const supportBtn = document.createElement('button');
+    supportBtn.innerHTML = 'I HAVE A PROBLEM (I\'M A LITTLE BITCH)';
+    supportBtn.className = 'fixed bottom-4 left-4 text-[10px] font-black text-gray-700 hover:text-red-600 uppercase tracking-widest transition-colors z-40';
+    document.body.appendChild(supportBtn);
+
+    supportBtn.onclick = () => {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4';
+        modal.innerHTML = `
+            <div class="bg-gray-900 border-4 border-red-600 p-10 max-w-md w-full shadow-[20px_20px_0px_0px_rgba(220,38,38,0.3)]">
+                <h2 class="text-3xl font-black text-white uppercase tracking-tighter mb-6">TELL US WHY YOU'RE CRYING</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Describe your "issue" (we won't read it):</label>
+                        <textarea class="w-full px-4 py-4 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-red-500 font-bold h-32 resize-none" placeholder="Whine here..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">How much do you regret being born?</label>
+                        <select class="w-full px-4 py-4 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-red-500 font-bold appearance-none">
+                            <option>Extremely</option>
+                            <option>More than my parents do</option>
+                            <option>I'm a total waste of space</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <button id="submitWhine" class="w-full bg-red-600 text-white font-black py-4 uppercase tracking-widest hover:bg-red-700 transition text-lg">
+                            SEND TO VOID
+                        </button>
+                        <button id="closeWhine" class="w-full bg-transparent text-gray-600 font-black py-2 uppercase tracking-widest hover:text-white transition text-xs">
+                            I'll stop being a bitch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('closeWhine').onclick = () => modal.remove();
+        
+        document.getElementById('submitWhine').onclick = () => {
+            modal.innerHTML = `
+                <div class="bg-gray-900 border-4 border-red-600 p-10 max-w-md w-full text-center shadow-[20px_20px_0px_0px_rgba(220,38,38,0.3)]">
+                    <h2 class="text-4xl font-black text-white uppercase tracking-tighter mb-6">REPORT RECEIVED</h2>
+                    <p class="text-gray-400 text-sm mb-10 font-black uppercase tracking-widest leading-relaxed">
+                        We've forwarded your complaint to your parents so they can be even more disappointed in you. 
+                        <br><br>
+                        Now shut up and get back to work, you pathetic snowflake.
+                    </p>
+                    <button id="finalClose" class="w-full bg-white text-black font-black py-4 uppercase tracking-widest hover:bg-gray-200 transition text-lg">
+                        I'm sorry for existing
+                    </button>
+                </div>
+            `;
+            document.getElementById('finalClose').onclick = () => modal.remove();
+        };
+    };
+}
+
 const originalTitle = document.title;
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
