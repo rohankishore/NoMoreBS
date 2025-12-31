@@ -18,30 +18,30 @@
 <body class="dark bg-gray-900 min-h-screen">
     <!-- Header with navigation -->
     <header class="bg-gray-800 border-b border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <img src="./assets/LOGO.png" alt="NoMoreBS" class="h-10">
-                <nav class="flex gap-4">
-                    <a href="dashboard.html" class="text-gray-400 hover:text-white transition">Dashboard</a>
-                    <a href="timer.html" class="text-gray-400 hover:text-white transition">Timer</a>
-                    <a href="tasks.html" class="text-gray-400 hover:text-white transition">Tasks</a>
-                    <a href="settings.html" class="text-purple-500 font-semibold">Settings</a>
+                <nav class="flex gap-6 text-xs uppercase tracking-widest font-bold">
+                    <a href="dashboard.html" class="text-gray-500 hover:text-white transition">Back to Reality</a>
+                    <a href="timer.html" class="text-gray-500 hover:text-white transition">Suffering</a>
+                    <a href="tasks.html" class="text-gray-500 hover:text-white transition">Failures</a>
+                    <a href="settings.html" class="text-red-500">Abuse</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    <main class="max-w-2xl mx-auto px-4 py-8">
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold text-white mb-2">Abuse Settings</h2>
-            <p class="text-gray-400">Customize how much you want to be verbally assaulted</p>
+    <main class="max-w-4xl mx-auto px-4 py-16">
+        <div class="mb-12">
+            <h2 class="text-4xl font-black text-white uppercase tracking-tighter">Abuse Settings</h2>
+            <p class="text-gray-500">Customize how much you want to be verbally assaulted.</p>
         </div>
 
-        <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 space-y-8">
+        <div class="bg-gray-800 border border-gray-700 p-10 space-y-12">
             <!-- Satire Level -->
             <div>
-                <label class="block text-lg font-medium text-gray-300 mb-4">
-                    Abuse Level: <span id="satireLevelDisplay" class="text-purple-400 font-bold">1</span>
+                <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-6">
+                    Abuse Level: <span id="satireLevelDisplay" class="text-red-500">1</span>
                 </label>
                 <input 
                     type="range" 
@@ -49,39 +49,37 @@
                     min="0" 
                     max="3" 
                     value="1"
-                    class="w-full h-3 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                    class="w-full h-1 bg-gray-700 appearance-none cursor-pointer accent-red-600"
                 >
-                <div class="flex justify-between text-sm text-gray-400 mt-2">
-                    <span>😊 Weak</span>
-                    <span>😐 Pathetic</span>
-                    <span>😏 Hurtful</span>
-                    <span>😤 Soul-Crushing</span>
+                <div class="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-600 mt-4">
+                    <span>Weak</span>
+                    <span>Pathetic</span>
+                    <span>Hurtful</span>
+                    <span>Soul-Crushing</span>
                 </div>
             </div>
 
             <!-- Allow Profanity -->
-            <div class="flex items-center justify-between p-4 bg-gray-700 rounded-lg">
+            <div class="flex items-center justify-between p-6 border border-gray-700">
                 <div>
-                    <label for="allowProfanity" class="text-lg font-medium text-gray-300 block">
+                    <label for="allowProfanity" class="text-lg font-black text-white uppercase tracking-tighter block">
                         Allow F-Bombs
                     </label>
-                    <p class="text-sm text-gray-400 mt-1">Enable strong language for maximum emotional damage</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Enable strong language for maximum emotional damage.</p>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="allowProfanity" class="sr-only peer">
-                    <div class="w-14 h-7 bg-gray-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-purple-600"></div>
+                    <div class="w-14 h-7 bg-gray-700 peer-focus:outline-none rounded-none peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600"></div>
                 </label>
             </div>
 
             <!-- Warning -->
-            <div id="profanityWarning" class="hidden p-4 bg-yellow-900/30 border border-yellow-700 rounded-lg">
-                <div class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                    </svg>
+            <div id="profanityWarning" class="hidden p-6 border-2 border-red-900 bg-red-900/10">
+                <div class="flex items-start gap-4">
+                    <div class="text-red-600 text-2xl font-black">!</div>
                     <div>
-                        <h4 class="text-yellow-300 font-semibold mb-1">Warning: You're a Snowflake</h4>
-                        <p class="text-yellow-300 text-sm">
+                        <h4 class="text-red-500 font-black uppercase tracking-widest text-sm mb-1">Warning: You're a Snowflake</h4>
+                        <p class="text-red-700 text-xs uppercase font-bold">
                             This mode will hurt your feelings. If you're going to cry, don't turn it on.
                         </p>
                     </div>
@@ -89,8 +87,8 @@
             </div>
 
             <!-- Logout Button -->
-            <div class="pt-4 border-t border-gray-700">
-                <button id="logoutBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition text-lg">
+            <div class="pt-8 border-t border-gray-700">
+                <button id="logoutBtn" class="w-full bg-white text-black font-black py-4 uppercase tracking-widest hover:bg-gray-200 transition text-lg">
                     Run Away (Logout)
                 </button>
             </div>
