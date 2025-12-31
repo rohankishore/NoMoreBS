@@ -18,57 +18,55 @@
 <body class="dark bg-gray-900 min-h-screen">
     <!-- Header with navigation -->
     <header class="bg-gray-800 border-b border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <img src="./assets/LOGO.png" alt="NoMoreBS" class="h-10">
-                <nav class="flex gap-4">
-                    <a href="dashboard.html" class="text-gray-400 hover:text-white transition">Dashboard</a>
-                    <a href="timer.html" class="text-purple-500 font-semibold">Timer</a>
-                    <a href="tasks.html" class="text-gray-400 hover:text-white transition">Tasks</a>
-                    <a href="settings.html" class="text-gray-400 hover:text-white transition">Settings</a>
+                <nav class="flex gap-6 text-xs uppercase tracking-widest font-bold">
+                    <a href="dashboard.html" class="text-gray-500 hover:text-white transition">Back to Reality</a>
+                    <a href="timer.html" class="text-red-500">Suffering</a>
+                    <a href="tasks.html" class="text-gray-500 hover:text-white transition">Failures</a>
+                    <a href="settings.html" class="text-gray-500 hover:text-white transition">Abuse</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <main class="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
-        <div class="w-full max-w-3xl">
+        <div class="w-full max-w-4xl">
             <div class="text-center">
                 <!-- Timer Presets -->
-                <div class="flex flex-wrap gap-3 justify-center mb-12">
-                    <button id="pomodoroBtn" class="px-8 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 transition shadow-md text-base">
+                <div class="flex flex-wrap gap-2 justify-center mb-16">
+                    <button id="pomodoroBtn" class="px-6 py-2 bg-white text-black font-black uppercase text-xs tracking-tighter hover:bg-gray-200 transition">
                         work, you lazy fuck
                     </button>
-                    <button id="shortBreakBtn" class="px-8 py-3 bg-transparent text-white font-medium rounded-full hover:bg-white/10 transition border-2 border-white/40 text-base">
-                        short break (undeserved)
+                    <button id="shortBreakBtn" class="px-6 py-2 bg-transparent text-white font-black uppercase text-xs tracking-tighter border border-white/20 hover:bg-white/10 transition">
+                        undeserved break
                     </button>
-                    <button id="longBreakBtn" class="px-8 py-3 bg-transparent text-white font-medium rounded-full hover:bg-white/10 transition border-2 border-white/40 text-base">
-                        long break (slacker)
+                    <button id="longBreakBtn" class="px-6 py-2 bg-transparent text-white font-black uppercase text-xs tracking-tighter border border-white/20 hover:bg-white/10 transition">
+                        slacker mode
                     </button>
                 </div>
 
                 <!-- Timer Display -->
-                <div id="timerDisplay" class="text-[160px] md:text-[200px] font-bold text-white mb-16 font-mono tracking-tight leading-none drop-shadow-lg">
+                <div id="timerDisplay" class="text-[180px] md:text-[240px] font-black text-white mb-16 font-mono tracking-tighter leading-none">
                     25:00
                 </div>
                 
                 <!-- Controls -->
-                <div class="flex gap-6 justify-center items-center">
-                    <button id="startBtn" class="px-12 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition text-xl shadow-lg hover:shadow-xl">
+                <div class="flex gap-4 justify-center items-center">
+                    <button id="startBtn" class="px-16 py-6 bg-red-600 text-white font-black uppercase tracking-widest hover:bg-red-700 transition text-2xl">
                         start suffering
                     </button>
-                    <button id="pauseBtn" class="px-12 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition text-xl shadow-lg hover:shadow-xl hidden">
+                    <button id="pauseBtn" class="px-16 py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition text-2xl hidden">
                         cowardice
                     </button>
-                    <button id="resetBtn" class="w-14 h-14 bg-transparent hover:bg-white/10 text-white rounded-full transition flex items-center justify-center border-2 border-transparent hover:border-white/40">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                        </svg>
+                    <button id="resetBtn" class="p-6 bg-transparent text-gray-600 hover:text-white transition uppercase text-xs font-bold tracking-widest">
+                        give up
                     </button>
                 </div>
 
                 <!-- Satirical Message -->
-                <div id="timerMessage" class="mt-16 p-6 bg-black/30 backdrop-blur-sm rounded-xl text-white text-lg font-medium hidden"></div>
+                <div id="timerMessage" class="mt-20 p-8 border-t border-gray-800 text-red-500 text-2xl font-black uppercase tracking-tighter hidden"></div>
             </div>
         </div>
     </main>

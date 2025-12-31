@@ -18,87 +18,46 @@
 <body class="dark bg-gray-900 min-h-screen">
     <!-- Header -->
     <header class="bg-gray-800 border-b border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="text-center">
-                <img src="./assets/LOGO.png" alt="NoMoreBS" class="h-16 mx-auto mb-2">
-                <p class="text-gray-400 text-lg">Stop Being a Lazy Piece of Shit</p>
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <img src="./assets/LOGO.png" alt="NoMoreBS" class="h-12">
+                <p class="text-gray-500 text-sm italic">Stop being a useless drain on society.</p>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
+    <main class="max-w-5xl mx-auto px-4 py-16">
         <!-- Welcome Section -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-white mb-4">Oh, You're Back. Great.</h2>
-            <p class="text-gray-400 text-lg">Pick a way to waste less of your pathetic life:</p>
+        <div class="mb-16">
+            <h2 class="text-5xl font-black text-white mb-4 uppercase tracking-tighter">You're still here?</h2>
+            <p class="text-gray-400 text-xl">Pick a way to waste less of your pathetic life before you die forgotten:</p>
         </div>
 
         <!-- Navigation Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
             <!-- Timer Card -->
-            <a href="timer.html" class="group bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all hover:scale-105 border-2 border-transparent hover:border-purple-500 shadow-lg">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 transition">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Focus Timer</h3>
-                    <p class="text-gray-400">Sit down and shut up for 25 minutes</p>
-                </div>
+            <a href="timer.html" class="group bg-gray-800 p-6 hover:bg-red-900/20 transition-all border border-gray-700 hover:border-red-500">
+                <h3 class="text-xl font-bold text-white mb-1">Suffering Timer</h3>
+                <p class="text-gray-500 text-sm">Sit down and shut up for 25 minutes.</p>
             </a>
 
             <!-- Tasks Card -->
-            <a href="tasks.html" class="group bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all hover:scale-105 border-2 border-transparent hover:border-purple-500 shadow-lg">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 transition">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Your Failures</h3>
-                    <p class="text-gray-400">List of things you'll never finish</p>
-                </div>
+            <a href="tasks.html" class="group bg-gray-800 p-6 hover:bg-red-900/20 transition-all border border-gray-700 hover:border-red-500">
+                <h3 class="text-xl font-bold text-white mb-1">Your Failures</h3>
+                <p class="text-gray-500 text-sm">List of things you'll never finish.</p>
             </a>
 
             <!-- Settings Card -->
-            <a href="settings.html" class="group bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all hover:scale-105 border-2 border-transparent hover:border-purple-500 shadow-lg">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-700 transition">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Settings</h3>
-                    <p class="text-gray-400">Adjust the level of verbal abuse</p>
-                </div>
+            <a href="settings.html" class="group bg-gray-800 p-6 hover:bg-red-900/20 transition-all border border-gray-700 hover:border-red-500">
+                <h3 class="text-xl font-bold text-white mb-1">Abuse Level</h3>
+                <p class="text-gray-500 text-sm">Adjust the verbal assault settings.</p>
             </a>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="bg-gray-800 rounded-2xl p-8 mb-8">
-            <h3 class="text-xl font-bold text-white mb-6 text-center">Your Sad Reality</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="text-5xl font-bold text-purple-500 mb-2">⏱️</div>
-                    <p class="text-gray-400">Try to Focus (You'll Fail)</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-bold text-purple-500 mb-2">✅</div>
-                    <p class="text-gray-400">Tasks You're Ignoring</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-bold text-purple-500 mb-2">🎯</div>
-                    <p class="text-gray-400">Unreachable Goals</p>
-                </div>
-            </div>
-        </div>
-
         <!-- Logout Section -->
-        <div class="text-center">
-            <button id="logoutBtn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-lg transition text-lg">
-                Get Out of Here
+        <div class="border-t border-gray-800 pt-8">
+            <button id="logoutBtn" class="text-gray-600 hover:text-red-500 transition text-sm uppercase tracking-widest font-bold">
+                → Abandon Ship (Logout)
             </button>
         </div>
     </main>

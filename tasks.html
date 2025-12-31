@@ -18,38 +18,43 @@
 <body class="dark bg-gray-900 min-h-screen">
     <!-- Header with navigation -->
     <header class="bg-gray-800 border-b border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <img src="./assets/LOGO.png" alt="NoMoreBS" class="h-10">
-                <nav class="flex gap-4">
-                    <a href="dashboard.html" class="text-gray-400 hover:text-white transition">Dashboard</a>
-                    <a href="timer.html" class="text-gray-400 hover:text-white transition">Timer</a>
-                    <a href="tasks.html" class="text-purple-500 font-semibold">Tasks</a>
-                    <a href="settings.html" class="text-gray-400 hover:text-white transition">Settings</a>
+                <nav class="flex gap-6 text-xs uppercase tracking-widest font-bold">
+                    <a href="dashboard.html" class="text-gray-500 hover:text-white transition">Back to Reality</a>
+                    <a href="timer.html" class="text-gray-500 hover:text-white transition">Suffering</a>
+                    <a href="tasks.html" class="text-red-500">Failures</a>
+                    <a href="settings.html" class="text-gray-500 hover:text-white transition">Abuse</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 py-12">
+    <main class="max-w-4xl mx-auto px-4 py-16">
+        <div class="mb-12">
+            <h2 class="text-4xl font-black text-white uppercase tracking-tighter">Your Failures</h2>
+            <p class="text-gray-500">A list of things you'll probably never do.</p>
+        </div>
+
         <!-- Add Task Form -->
-        <div class="mb-8">
-            <form id="addTodoForm" class="flex gap-3">
+        <div class="mb-12">
+            <form id="addTodoForm" class="flex flex-col md:flex-row gap-2">
                 <input 
                     type="text" 
                     id="todoInput" 
                     placeholder="What are you going to fail at today?"
                     required
-                    class="flex-1 px-6 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-full text-white placeholder-gray-300 focus:outline-none focus:border-white/40 text-base"
+                    class="flex-1 px-6 py-4 bg-gray-800 border border-gray-700 text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-lg font-bold"
                 >
                 <input 
                     type="datetime-local" 
                     id="todoDeadline" 
-                    class="px-6 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-full text-white focus:outline-none focus:border-white/40 text-base"
+                    class="px-6 py-4 bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-red-500 text-lg"
                 >
                 <button 
                     type="submit"
-                    class="px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition text-base shadow-lg whitespace-nowrap"
+                    class="px-10 py-4 bg-white text-black font-black uppercase tracking-widest hover:bg-gray-200 transition text-lg"
                 >
                     Add Failure
                 </button>
@@ -57,10 +62,10 @@
         </div>
 
         <!-- Task List -->
-        <div class="space-y-3">
-            <div id="todoList" class="space-y-3">
-                <div class="text-center text-gray-300 py-12">
-                    <div class="animate-pulse text-lg">Loading your excuses...</div>
+        <div class="space-y-2">
+            <div id="todoList" class="space-y-2">
+                <div class="text-center text-gray-600 py-20 border-2 border-dashed border-gray-800">
+                    <div class="text-xl font-black uppercase tracking-widest">Loading your excuses...</div>
                 </div>
             </div>
         </div>
