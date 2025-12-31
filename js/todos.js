@@ -7,6 +7,7 @@ let deadlineCheckInterval = null;
 async function checkOverdueTasks() {
     if (!currentUser) return;
     
+    
     const { data, error } = await supabase
         .from('todos')
         .select('*')
