@@ -1,4 +1,20 @@
 export function getSatiricalLine(level, allowProfanity) {
+    const settings = JSON.parse(localStorage.getItem('satireSettings') || '{}');
+    
+    if (settings.snowflakeMode) {
+        const wholesome = [
+            "You are a beautiful unique snowflake!",
+            "I'm so proud of you for just existing today.",
+            "You deserve a warm hug and a cup of cocoa.",
+            "The world is a better place because you're in it.",
+            "Don't push yourself too hard, you're doing great!",
+            "You are valid, you are loved, and you are special.",
+            "Take a deep breath and feel the universe loving you.",
+            "You're a shining star in a dark world."
+        ];
+        return wholesome[Math.floor(Math.random() * wholesome.length)];
+    }
+
     const messages = {
         0: [
             "Good job! You completed a focused work session.",
@@ -70,12 +86,13 @@ export async function getSatireSettings() {
     
     return {
         level: 1,
-        allowProfanity: false
+        allowProfanity: false,
+        snowflakeMode: false
     };
 }
 
-export async function saveSatireSettings(level, allowProfanity) {
-    const settings = { level, allowProfanity };
+export async function saveSatireSettings(level, allowProfanity, snowflakeMode = false) {
+    const settings = { level, allowProfanity, snowflakeMode };
     localStorage.setItem('satireSettings', JSON.stringify(settings));
 }
 
@@ -84,13 +101,12 @@ export async function initSatireSettings() {
     const satireLevelDisplay = document.getElementById('satireLevelDisplay');
     const allowProfanity = document.getElementById('allowProfanity');
     const profanityWarning = document.getElementById('profanityWarning');
+    const snowflakeMode = document.getElementById('snowflakeMode');
     
     const satireLevelMobile = document.getElementById('satireLevelMobile');
     const satireLevelDisplayMobile = document.getElementById('satireLevelDisplayMobile');
     const allowProfanityMobile = document.getElementById('allowProfanityMobile');
     const profanityWarningMobile = document.getElementById('profanityWarningMobile');
-    
-    if (!satireLevel && !satireLevelMobile) return;
     
     const settings = await getSatireSettings();
     
@@ -99,6 +115,7 @@ export async function initSatireSettings() {
         satireLevelDisplay.textContent = settings.level;
         allowProfanity.checked = settings.allowProfanity;
         if (settings.allowProfanity) profanityWarning.classList.remove('hidden');
+        if (snowflakeMode) snowflakeMode.checked = settings.snowflakeMode;
     }
     
     if (satireLevelMobile) {
@@ -113,7 +130,7 @@ export async function initSatireSettings() {
         satireLevelDisplay.textContent = level;
         if (satireLevelDisplayMobile) satireLevelDisplayMobile.textContent = level;
         if (satireLevelMobile) satireLevelMobile.value = level;
-        saveSatireSettings(parseInt(level), allowProfanity?.checked || false);
+        saveSatireSettings(parseInt(level), allowProfanity?.checked || false, snowflakeMode?.checked || false);
     });
     
     satireLevelMobile?.addEventListener('input', (e) => {
@@ -121,13 +138,13 @@ export async function initSatireSettings() {
         satireLevelDisplayMobile.textContent = level;
         if (satireLevelDisplay) satireLevelDisplay.textContent = level;
         if (satireLevel) satireLevel.value = level;
-        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false);
+        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false, settings.snowflakeMode);
     });
     
     allowProfanity?.addEventListener('change', (e) => {
         const checked = e.target.checked;
         if (allowProfanityMobile) allowProfanityMobile.checked = checked;
-        saveSatireSettings(parseInt(satireLevel?.value || 1), checked);
+        saveSatireSettings(parseInt(satireLevel?.value || 1), checked, snowflakeMode?.checked || false);
         
         if (checked) {
             profanityWarning?.classList.remove('hidden');
@@ -135,6 +152,16 @@ export async function initSatireSettings() {
         } else {
             profanityWarning?.classList.add('hidden');
             profanityWarningMobile?.classList.add('hidden');
+        }
+    });
+
+    snowflakeMode?.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        saveSatireSettings(parseInt(satireLevel?.value || 1), allowProfanity?.checked || false, checked);
+        if (checked) {
+            location.reload(); // Trigger the pink nightmare
+        } else {
+            location.reload();
         }
     });
     
