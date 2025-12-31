@@ -1,9 +1,3 @@
-/**
- * Satirical message generator with adjustable levels
- * @param {number} level - Satire level (0-3)
- * @param {boolean} allowProfanity - Whether to allow strong language
- * @returns {string} A satirical message
- */
 export function getSatiricalLine(level, allowProfanity) {
     const messages = {
         0: [
@@ -58,49 +52,29 @@ export function getSatiricalLine(level, allowProfanity) {
     return levelMessages[Math.floor(Math.random() * levelMessages.length)];
 }
 
-/**
- * Get current satire settings
- * @returns {Promise<{level: number, allowProfanity: boolean}>}
- */
 export async function getSatireSettings() {
-    // Try to get from localStorage first (faster)
     const cached = localStorage.getItem('satireSettings');
     if (cached) {
         return JSON.parse(cached);
     }
     
-    // Default settings
     return {
         level: 1,
         allowProfanity: false
     };
 }
 
-/**
- * Save satire settings
- * @param {number} level 
- * @param {boolean} allowProfanity 
- */
 export async function saveSatireSettings(level, allowProfanity) {
     const settings = { level, allowProfanity };
-    
-    // Save to localStorage
     localStorage.setItem('satireSettings', JSON.stringify(settings));
-    
-    // Optional: Save to Supabase user metadata or settings table
-    // This would require importing supabase and updating user metadata
 }
 
-/**
- * Initialize satire settings UI
- */
 export async function initSatireSettings() {
     const satireLevel = document.getElementById('satireLevel');
     const satireLevelDisplay = document.getElementById('satireLevelDisplay');
     const allowProfanity = document.getElementById('allowProfanity');
     const profanityWarning = document.getElementById('profanityWarning');
     
-    // Mobile elements
     const satireLevelMobile = document.getElementById('satireLevelMobile');
     const satireLevelDisplayMobile = document.getElementById('satireLevelDisplayMobile');
     const allowProfanityMobile = document.getElementById('allowProfanityMobile');
@@ -108,10 +82,8 @@ export async function initSatireSettings() {
     
     if (!satireLevel && !satireLevelMobile) return;
     
-    // Load saved settings
     const settings = await getSatireSettings();
     
-    // Set desktop values
     if (satireLevel) {
         satireLevel.value = settings.level;
         satireLevelDisplay.textContent = settings.level;
@@ -119,7 +91,6 @@ export async function initSatireSettings() {
         if (settings.allowProfanity) profanityWarning.classList.remove('hidden');
     }
     
-    // Set mobile values
     if (satireLevelMobile) {
         satireLevelMobile.value = settings.level;
         satireLevelDisplayMobile.textContent = settings.level;
@@ -127,7 +98,6 @@ export async function initSatireSettings() {
         if (settings.allowProfanity) profanityWarningMobile.classList.remove('hidden');
     }
     
-    // Desktop: Update level display
     satireLevel?.addEventListener('input', (e) => {
         const level = e.target.value;
         satireLevelDisplay.textContent = level;
@@ -136,7 +106,6 @@ export async function initSatireSettings() {
         saveSatireSettings(parseInt(level), allowProfanity?.checked || false);
     });
     
-    // Mobile: Update level display
     satireLevelMobile?.addEventListener('input', (e) => {
         const level = e.target.value;
         satireLevelDisplayMobile.textContent = level;
@@ -145,7 +114,6 @@ export async function initSatireSettings() {
         saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false);
     });
     
-    // Desktop: Update profanity setting
     allowProfanity?.addEventListener('change', (e) => {
         const checked = e.target.checked;
         if (allowProfanityMobile) allowProfanityMobile.checked = checked;
@@ -160,7 +128,6 @@ export async function initSatireSettings() {
         }
     });
     
-    // Mobile: Update profanity setting
     allowProfanityMobile?.addEventListener('change', (e) => {
         const checked = e.target.checked;
         if (allowProfanity) allowProfanity.checked = checked;

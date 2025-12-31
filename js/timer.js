@@ -1,16 +1,13 @@
 import { getSatiricalLine, getSatireSettings, initSatireSettings } from './satire.js';
 
 let timerInterval = null;
-let timeRemaining = 25 * 60; // 25 minutes (pomodoro)
+let timeRemaining = 25 * 60;
 let isRunning = false;
 let pauseStartTime = null;
 let pauseWarningShown = false;
 let initialTimeRemaining = 25 * 60;
-let currentMode = 'pomodoro'; // Track current timer mode
+let currentMode = 'pomodoro';
 
-/**
- * Show satirical message
- */
 async function showSatireMessage(message, type = 'info') {
     const messageEl = document.getElementById('timerMessage');
     messageEl.textContent = message;
@@ -19,15 +16,13 @@ async function showSatireMessage(message, type = 'info') {
     }`;
     messageEl.classList.remove('hidden');
 }
+
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
-/**
- * Update timer display
- */
 function updateDisplay() {
     const display = document.getElementById('timerDisplay');
     if (display) {
@@ -35,9 +30,6 @@ function updateDisplay() {
     }
 }
 
-/**
- * Start the timer
- */
 function startTimer() {
     if (isRunning) return;
     
@@ -58,9 +50,6 @@ function startTimer() {
     }, 1000);
 }
 
-/**
- * Pause the timer
- */
 function pauseTimer() {
     isRunning = false;
     clearInterval(timerInterval);
@@ -68,16 +57,9 @@ function pauseTimer() {
     pauseWarningShown = false;
     document.getElementById('startBtn').classList.remove('hidden');
     document.getElementById('pauseBtn').classList.add('hidden');
-    
-    // Start checking pause duration
-    setTimeout(() => checkPauseDuration(), 61000); // Check after 61 seconds
 }
 
-/**
- * Reset the timer
- */
 async function resetTimer() {
-    // Check if quitting early (more than 10% of time remaining)
     const percentRemaining = timeRemaining / initialTimeRemaining;
     
     if (isRunning || (timeRemaining > 0 && percentRemaining > 0.1)) {
@@ -91,7 +73,7 @@ async function resetTimer() {
                 "Quitting early again? What a surprise. You're absolutely useless."
         };
         
-        if (percentRemaining > 0.5) { // More than 50% remaining
+        if (percentRemaining > 0.5) {
             showSatireMessage(messages[settings.level] || messages[1], 'error');
         }
     }
@@ -106,9 +88,6 @@ async function resetTimer() {
     document.getElementById('pauseBtn').classList.add('hidden');
 }
 
-/**
- * Set timer to pomodoro (25 minutes)
- */
 function setPomodoro() {
     if (isRunning) return;
     currentMode = 'pomodoro';
@@ -119,9 +98,6 @@ function setPomodoro() {
     document.getElementById('timerMessage').classList.add('hidden');
 }
 
-/**
- * Set timer to short break (5 minutes)
- */
 function setShortBreak() {
     if (isRunning) return;
     currentMode = 'short';
@@ -132,9 +108,6 @@ function setShortBreak() {
     document.getElementById('timerMessage').classList.add('hidden');
 }
 
-/**
- * Set timer to long break (15 minutes)
- */
 function setLongBreak() {
     if (isRunning) return;
     currentMode = 'long';
@@ -145,22 +118,17 @@ function setLongBreak() {
     document.getElementById('timerMessage').classList.add('hidden');
 }
 
-/**
- * Update button styles based on active mode
- */
 function updateModeButtons() {
     const pomodoroBtn = document.getElementById('pomodoroBtn');
     const shortBreakBtn = document.getElementById('shortBreakBtn');
     const longBreakBtn = document.getElementById('longBreakBtn');
     
-    // Reset all buttons to inactive state
     [pomodoroBtn, shortBreakBtn, longBreakBtn].forEach(btn => {
         if (btn) {
             btn.className = 'px-8 py-3 bg-transparent text-white font-medium rounded-full hover:bg-white/10 transition border-2 border-white/40 text-base';
         }
     });
     
-    // Highlight active button
     const activeBtn = currentMode === 'pomodoro' ? pomodoroBtn : 
                       currentMode === 'short' ? shortBreakBtn : longBreakBtn;
     if (activeBtn) {
@@ -168,29 +136,19 @@ function updateModeButtons() {
     }
 }
 
-/**
- * Handle timer completion
- */
 async function completeTimer() {
     pauseTimer();
     timeRemaining = 0;
     updateDisplay();
     
-    // Get satire settings and show message
     const settings = await getSatireSettings();
     const message = getSatiricalLine(settings.level, settings.allowProfanity);
     
     const messageEl = document.getElementById('timerMessage');
     messageEl.textContent = message;
     messageEl.classList.remove('hidden');
-    
-    // Play sound (optional, commented out for now)
-    // playNotificationSound();
 }
 
-/**
- * Initialize timer functionality
- */
 export function initTimer() {
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
@@ -201,19 +159,14 @@ export function initTimer() {
     
     if (!startBtn) return;
     
-    // Initialize satire settings
     initSatireSettings();
-    
-    // Set initial display
     updateDisplay();
     updateModeButtons();
     
-    // Attach event listeners
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
     resetBtn.addEventListener('click', resetTimer);
     
-    // Attach preset button listeners
     pomodoroBtn?.addEventListener('click', setPomodoro);
     shortBreakBtn?.addEventListener('click', setShortBreak);
     longBreakBtn?.addEventListener('click', setLongBreak);

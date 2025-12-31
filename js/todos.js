@@ -4,10 +4,6 @@ import { getSatiricalLine, getSatireSettings } from './satire.js';
 let currentUser = null;
 let deadlineCheckInterval = null;
 
-
-/**
- * Check for overdue tasks and show satire
- */
 async function checkOverdueTasks() {
     if (!currentUser) return;
     
@@ -25,7 +21,6 @@ async function checkOverdueTasks() {
     
     data.forEach(todo => {
         if (new Date(todo.deadline) < now) {
-            // Check if we've already shown notification for this task
             const notifiedKey = `notified_${todo.id}`;
             if (!localStorage.getItem(notifiedKey)) {
                 const messages = {
@@ -44,11 +39,7 @@ async function checkOverdueTasks() {
     });
 }
 
-/**
- * Show notification
- */
 function showNotification(message, type = 'info') {
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
         type === 'error' ? 'bg-red-900/90 border border-red-700 text-red-200' : 'bg-gray-800/90 border border-gray-700 text-white'
@@ -62,18 +53,13 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-/**
- * Load todos from Supabase
- */
 async function loadTodos() {
     const todoList = document.getElementById('todoList');
     
     try {
-        // Get current user
         const { data: { user } } = await supabase.auth.getUser();
         currentUser = user;
         
-        // Fetch todos
         const { data, error } = await supabase
             .from('todos')
             .select('*')
@@ -82,7 +68,6 @@ async function loadTodos() {
         
         if (error) throw error;
         
-        // Render todos
         if (data.length === 0) {
             const emptyHTML = `
                 <div class="text-center text-gray-300 py-12 text-base">
@@ -110,9 +95,6 @@ async function loadTodos() {
     }
 }
 
-/**
- * Render a single todo item
- */
 function renderTodoItem(todo) {
     const now = new Date();
     const deadline = todo.deadline ? new Date(todo.deadline) : null;
@@ -148,18 +130,12 @@ function renderTodoItem(todo) {
     `;
 }
 
-/**
- * Escape HTML to prevent XSS
- */
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-/**
- * Add a new todo
- */
 async function addTodo(title, deadline = null) {
     try {
         const { error } = await supabase
@@ -182,9 +158,6 @@ async function addTodo(title, deadline = null) {
     }
 }
 
-/**
- * Show a modal asking if the user is lying about finishing a task
- */
 async function showCompletionModal() {
     return new Promise((resolve) => {
         const modal = document.createElement('div');
@@ -216,12 +189,8 @@ async function showCompletionModal() {
     });
 }
 
-/**
- * Toggle todo completion
- */
 async function toggleTodo(todoId, completed) {
     try {
-        // Clear notification flag when completing
         if (completed) {
             const result = await showCompletionModal();
             const settings = await getSatireSettings();
@@ -265,9 +234,6 @@ async function toggleTodo(todoId, completed) {
     }
 }
 
-/**
- * Delete a todo
- */
 async function deleteTodo(todoId) {
     try {
         const { error } = await supabase
@@ -284,11 +250,7 @@ async function deleteTodo(todoId) {
     }
 }
 
-/**
- * Attach event listeners to todo items
- */
 function attachTodoEventListeners() {
-    // Checkboxes
     document.querySelectorAll('.todo-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             const todoId = e.target.closest('[data-todo-id]').dataset.todoId;
@@ -296,7 +258,6 @@ function attachTodoEventListeners() {
         });
     });
     
-    // Delete buttons
     document.querySelectorAll('.todo-delete').forEach(button => {
         button.addEventListener('click', (e) => {
             const todoId = e.target.closest('[data-todo-id]').dataset.todoId;
@@ -307,9 +268,6 @@ function attachTodoEventListeners() {
     });
 }
 
-/**
- * Initialize todo functionality
- */
 export function initTodos() {
     const addTodoForm = document.getElementById('addTodoForm');
     const addTodoFormMobile = document.getElementById('addTodoFormMobile');
