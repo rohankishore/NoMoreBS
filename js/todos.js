@@ -84,7 +84,7 @@ async function loadTodos() {
         // Render todos
         if (data.length === 0) {
             const emptyHTML = `
-                <div class="text-center text-gray-400 py-8 text-sm">
+                <div class="text-center text-gray-300 py-12 text-base">
                     No tasks yet. Add one above!
                 </div>
             `;
@@ -123,23 +123,23 @@ function renderTodoItem(todo) {
     }) : '';
     
     return `
-        <div class="flex items-start gap-3 bg-gray-700 p-3 rounded-lg group ${isOverdue ? 'border-2 border-red-500' : ''}" data-todo-id="${todo.id}">
+        <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm border-2 ${isOverdue ? 'border-red-400' : 'border-white/20'} p-4 rounded-2xl group hover:bg-white/15 transition" data-todo-id="${todo.id}">
             <input 
                 type="checkbox" 
                 ${todo.completed ? 'checked' : ''}
-                class="todo-checkbox w-5 h-5 mt-1 rounded border-gray-500 text-purple-600 focus:ring-purple-500 focus:ring-offset-gray-700 cursor-pointer flex-shrink-0"
+                class="todo-checkbox w-6 h-6 rounded-full border-2 border-white/40 text-purple-600 focus:ring-2 focus:ring-white/40 cursor-pointer flex-shrink-0 bg-transparent"
             >
             <div class="flex-1 min-w-0">
-                <span class="block text-white text-sm ${todo.completed ? 'line-through text-gray-400' : ''}">
+                <span class="block text-white text-base ${todo.completed ? 'line-through text-gray-400' : ''}">
                     ${escapeHtml(todo.title)}
                 </span>
                 ${deadline ? `
-                    <span class="block text-xs mt-1 ${isOverdue ? 'text-red-400 font-semibold' : 'text-gray-400'}">
-                        ${isOverdue ? '⚠️ ' : '📅 '}${deadlineText}${isOverdue ? ' (OVERDUE)' : ''}
+                    <span class="block text-sm mt-1 ${isOverdue ? 'text-red-300 font-medium' : 'text-gray-300'}">
+                        ${isOverdue ? '⚠️ ' : ''}${deadlineText}${isOverdue ? ' - OVERDUE' : ''}
                     </span>
                 ` : ''}
             </div>
-            <button class="todo-delete opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-300 transition flex-shrink-0">
+            <button class="todo-delete opacity-0 group-hover:opacity-100 text-red-300 hover:text-red-200 transition flex-shrink-0 p-2 hover:bg-red-500/20 rounded-full">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
