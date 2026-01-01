@@ -108,11 +108,19 @@
         import { checkAuthentication, logout } from './js/auth.js';
         import { initSatireSettings, initSupport } from './js/satire.js';
         
-        await checkAuthentication();
+        const session = await checkAuthentication();
         initSatireSettings();
         initSupport();
         
-        document.getElementById('logoutBtn')?.addEventListener('click', logout);
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            if (!session) {
+                logoutBtn.textContent = 'Login to Save Progress';
+                logoutBtn.onclick = () => window.location.href = 'login.html';
+            } else {
+                logoutBtn.addEventListener('click', logout);
+            }
+        }
     </script>
 </body>
 </html>

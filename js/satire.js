@@ -130,7 +130,7 @@ export async function initSatireSettings() {
         satireLevelDisplay.textContent = level;
         if (satireLevelDisplayMobile) satireLevelDisplayMobile.textContent = level;
         if (satireLevelMobile) satireLevelMobile.value = level;
-        saveSatireSettings(parseInt(level), allowProfanity?.checked || false, snowflakeMode?.checked || false);
+        saveSatireSettings(parseInt(level), allowProfanity?.checked || false, snowflakeMode ? snowflakeMode.checked : settings.snowflakeMode);
     });
     
     satireLevelMobile?.addEventListener('input', (e) => {
@@ -138,13 +138,13 @@ export async function initSatireSettings() {
         satireLevelDisplayMobile.textContent = level;
         if (satireLevelDisplay) satireLevelDisplay.textContent = level;
         if (satireLevel) satireLevel.value = level;
-        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false, snowflakeMode?.checked || false);
+        saveSatireSettings(parseInt(level), allowProfanityMobile?.checked || false, snowflakeMode ? snowflakeMode.checked : settings.snowflakeMode);
     });
     
     allowProfanity?.addEventListener('change', (e) => {
         const checked = e.target.checked;
         if (allowProfanityMobile) allowProfanityMobile.checked = checked;
-        saveSatireSettings(parseInt(satireLevel?.value || 1), checked, snowflakeMode?.checked || false);
+        saveSatireSettings(parseInt(satireLevel?.value || 1), checked, snowflakeMode ? snowflakeMode.checked : settings.snowflakeMode);
         
         if (checked) {
             profanityWarning?.classList.remove('hidden');
@@ -155,20 +155,16 @@ export async function initSatireSettings() {
         }
     });
 
-    snowflakeMode?.addEventListener('change', (e) => {
+    snowflakeMode?.addEventListener('change', async (e) => {
         const checked = e.target.checked;
-        saveSatireSettings(parseInt(satireLevel?.value || 1), allowProfanity?.checked || false, checked);
-        if (checked) {
-            location.reload(); // Trigger the pink nightmare
-        } else {
-            location.reload();
-        }
+        await saveSatireSettings(parseInt(satireLevel?.value || 1), allowProfanity?.checked || false, checked);
+        location.reload();
     });
     
     allowProfanityMobile?.addEventListener('change', (e) => {
         const checked = e.target.checked;
         if (allowProfanity) allowProfanity.checked = checked;
-        saveSatireSettings(parseInt(satireLevelMobile?.value || 1), checked, snowflakeMode?.checked || false);
+        saveSatireSettings(parseInt(satireLevelMobile?.value || 1), checked, snowflakeMode ? snowflakeMode.checked : settings.snowflakeMode);
         
         if (checked) {
             profanityWarning?.classList.remove('hidden');
@@ -267,11 +263,12 @@ document.addEventListener('visibilitychange', () => {
 });
 
 export async function applySnowflakeMode() {
-    const settings = await getSatireSettings();
+    const settings = JSON.parse(localStorage.getItem('satireSettings') || '{}');
     if (!settings.snowflakeMode) return;
 
-    // Turn everything pink and soft
+    // Turn everything pink and soft IMMEDIATELY
     const style = document.createElement('style');
+    style.id = 'snowflake-styles';
     style.innerHTML = `
         * { 
             border-radius: 50px !important; 
@@ -289,7 +286,7 @@ export async function applySnowflakeMode() {
     // The "Crash" logic
     setTimeout(() => {
         document.body.innerHTML = `
-            <div style="height: 100vh; width: 100vw; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: sans-serif;">
+            <div style="height: 100vh; width: 100vw; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: sans-serif; position: fixed; top: 0; left: 0; z-index: 9999;">
                 <h1 style="font-size: 10rem;">🤡</h1>
                 <h2 style="color: black; font-weight: 900; text-transform: uppercase; font-size: 3rem;">CRITICAL FAILURE: COWARDICE DETECTED</h2>
                 <p style="color: #666; font-size: 1.5rem; margin-top: 20px;">
@@ -307,4 +304,5 @@ export async function applySnowflakeMode() {
     }, 30000);
 }
 
+// Run it immediately when the script loads
 applySnowflakeMode();

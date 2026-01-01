@@ -4,6 +4,13 @@ export async function checkAuthentication() {
     const { data: { session } } = await supabase.auth.getSession();
     
     if (!session) {
+        // Allow access to timer and settings without login
+        const publicPages = ['timer.html', 'settings.html'];
+        const isPublicPage = publicPages.some(page => window.location.pathname.includes(page));
+        
+        if (isPublicPage) {
+            return null;
+        }
         window.location.href = '/login.html';
         return null;
     }
