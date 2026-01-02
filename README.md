@@ -19,58 +19,42 @@
 
 # Why are you even reading this?
 
-Are you looking for a "gentle" productivity app? A "mindful" meditation tool? A "supportive" community? 
+If you're looking for a "gentle" productivity app or some "mindful" meditation bullshit, **FUCK OFF.**
 
-**FUCK OFF.**
+NoMoreBS is for people who are tired of being lazy pieces of shit. We don't do "positive reinforcement." We do "brutal honesty." If you can't handle being yelled at by a script, go back to your coloring books.
 
-NoMoreBS is for people who are tired of being lazy pieces of shit. We don't do "positive reinforcement." We do "brutal honesty."
+### What's inside (if you care):
+*   **The Timer:** It insults you. If you stop, it insults you more.
+*   **The Task List:** A graveyard for all the things you'll never actually finish.
+*   **Truth-Check:** Don't try to lie about finishing a task. The app will call you out on your bullshit.
+*   **Parental Shame:** There's a 10% chance you'll get a "disappointed email from parents" if you reset the timer. Just like real life.
+*   **Snowflake Mode:** For the fragile ones. It turns the app pink and uses Comic Sans before it eventually crashes because it can't stand your cowardice.
+*   **PWA:** You can install this on your phone. Now you can be a failure anywhere.
 
-### Features:
-- **Focus Timer:** A timer that insults you if you stop.
-- **Task List:** A list of things you'll probably fail to do.
-- **Truth-Check:** A modal that asks if you're fucking lying about finishing a task.
-- **Parental Disappointment:** A 10% chance of receiving a shaming email from "parents" when you reset the timer.
-- **Satire Levels:** From "Mild Disappointment" to "Total Emotional Destruction."
-- **Zero Support:** A "Report Issue" button that sends your complaints directly to the void.
-- **PWA Support:** Install it on your phone so you can be insulted on the go.
+### Setup for Morons
 
-### Technical Requirements for Idiots
+If you clone this and the screen turns red calling you an idiot, it's because you didn't set up your Supabase keys. 
 
-If you clone this and the screen turns red and calls you a moron, it's because you didn't set up your Supabase keys.
+1. Go to [Supabase](https://supabase.com). Get your keys.
+2. Put them in `env-config.js`. 
+3. **DON'T COMMIT YOUR KEYS.** I added it to `.gitignore` because I know you're incompetent, but try to pay attention.
 
-1.  **Get your keys** from [Supabase](https://supabase.com).
-2.  **Edit `env-config.js`** and paste them in.
-3.  **Don't commit your keys** to your own repo. I've already added it to `.gitignore` because I know you'd forget.
+### Deployment (The "Pro" Way)
 
-### Deployment for Lazy People (The "Pro" Way)
+If you're using Vercel/Netlify, don't edit the file like a caveman. Add `SUPABASE_URL` and `SUPABASE_ANON_KEY` to your env vars and set your build command to:
 
-If you're hosting this on Vercel, Netlify, or similar, don't manually edit `env-config.js` like a caveman. 
-
-1. **Add Environment Variables** in your hosting dashboard:
-   - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY`
-2. **Set the Build Command** to:
-   `printf "window.ENV = { SUPABASE_URL: '%%s', SUPABASE_ANON_KEY: '%%s' };" "$SUPABASE_URL" "$SUPABASE_ANON_KEY" > env-config.js`
-
-This will generate the config file automatically during deployment so your users don't have to do anything except fail at their tasks.
+`printf "window.ENV = { SUPABASE_URL: '%%s', SUPABASE_ANON_KEY: '%%s' };" "$SUPABASE_URL" "$SUPABASE_ANON_KEY" > env-config.js`
 
 ---
 
-*Disclaimer: If you're offended, good. That's the point. Now go do something useful for once.*
+## Contributing (Don't be useless)
 
-## Contributing (If you're not useless)
+Think you're funny? Prove it. 
 
-Think you're funny? Think you can hurt feelings better than I can? Prove it.
+*   **More Insults:** The current ones are too nice. We need stuff that makes people want to delete their accounts.
+*   **Hostile Features:** Anything that makes the user experience more miserable and productive.
+*   **Bug Fixes:** If you find a bug, fix it. Don't open an issue like a little bitch.
 
-We're looking for:
-- **More Insults:** The current ones are getting too "nice." We need stuff that actually makes people want to delete their accounts.
-- **Hostile Features:** Anything that makes the user experience more miserable and productive.
-- **Bug Fixes:** If you find a bug, fix it yourself. Don't open an issue like a little bitch.
+Fork it, add your verbal abuse, and open a PR. If your insults are weak, I'll block you.
 
-**How to contribute:**
-1. Fork this repo (if you even know how).
-2. Add your creative verbal abuse.
-3. Open a Pull Request.
-4. If your insults are weak, I'll close it and block you.
-
-Now go away.
+Now go do something useful for once.
