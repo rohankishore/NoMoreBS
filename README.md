@@ -32,6 +32,7 @@ NoMoreBS is for people who are tired of being lazy pieces of shit. We don't do "
 - **Parental Disappointment:** A 10% chance of receiving a shaming email from "parents" when you reset the timer.
 - **Satire Levels:** From "Mild Disappointment" to "Total Emotional Destruction."
 - **Zero Support:** A "Report Issue" button that sends your complaints directly to the void.
+- **PWA Support:** Install it on your phone so you can be insulted on the go.
 
 ### Technical Requirements for Idiots
 

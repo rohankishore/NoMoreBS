@@ -1,0 +1,17 @@
+{
+  "name": "NoMoreBS",
+  "short_name": "NoMoreBS",
+  "description": "A brutalist productivity app that hates you.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#dc2626",
+  "icons": [
+    {
+      "src": "assets/LOGO.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
